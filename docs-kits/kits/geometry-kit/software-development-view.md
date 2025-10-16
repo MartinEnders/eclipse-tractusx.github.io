@@ -5,6 +5,23 @@ description: 'Software Development View Geometry Kit'
 sidebar_position: 4
 ---
 
+<!-- TODOs
+
+Architecture overview and implementation insights
+- Define Section for Reference Implementation
+  - Describe current idea for reference implementation conceptually (Data Consumer ask DigitalRegistiry, gets DT, see scenenode in payload, request scenenode payload, see link to binarydata, .... and then how data provider Endpoint can be used to fetch File) -> MICHAEL (/ SARAH)
+  - Add and Describe Example Payloads SARAH
+- Include "Architecture" Section with diagram from geometry standard doc MICHAEL
+- Data Retrival Flow (see: https://eclipse-tractusx.github.io/docs-kits/kits/eco-pass-kit/software-development-view#data-retrieval-flow) MICHAEL
+- List of Relevant related CX Implementations (EDC, Registry, etc.) similar to https://eclipse-tractusx.github.io/docs-kits/kits/eco-pass-kit/software-development-view#prerequisites MICHAEL
+  - EDC
+  - Registry
+  - AAS
+- 
+
+
+-->
+
 ## Architecture
 
 > **Warning**
@@ -126,7 +143,7 @@ sequenceDiagram
 
 ```
 
-## Requirements Aspect Model
+## Geometry Aspect Model
 
 The following section gives an overview of the requirements aspect model. The requirements aspect model is a submodel that contains the requirements information and the status of the requirement.
 

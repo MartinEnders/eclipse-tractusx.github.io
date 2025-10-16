@@ -5,6 +5,39 @@ description: 'Adoption View Geometry Kit'
 sidebar_position: 2
 ---
 
+<!-- TODOs: 
+
+
+Reference Implemenation
+- Where is the reference implementation sitting? What repo? 
+
+
+
+Section Use Case
+
+- Use Case selection: WG needs to align on Use Cases we are gonna describe that are relevant
+  - Currently Engineering Collaboration as the Use Case favoured. 
+  
+- User Journey Diagram and description. We need to describe how a user would interact with geometry. Meaning the use case of: Geometry is created -> Shared with Partner 2 -> Partner 2 Reviews -> Gives back to Partner 1 ... see WG Miro HANNES
+- Customer Joureny: https://eclipse-tractusx.github.io/docs-kits/kits/requirements-kit/adoption-view#customer-journey HANNES 
+
+
+Section: Geometry understanding
+- Description of structure of 3D Data vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH / HANNES 
+
+
+Describe Relevant Related Standards: 
+- Geometry Standard
+- Binary Exchange (Standard or aspect model)
+- Master Data 
+SARAH 
+
+
+ 
+ -->
+
+
+
 ## Vision & Mission
 
 ### Vision
@@ -55,6 +88,8 @@ The Geometry Kit offers significant advantages for Small and Medium-sized Enterp
 Catena-X offers solution providers a variety of strategic advantages to leverage their innovation capabilities and strengthen their market position beyond the automotive industry. Here are some examples of how solution providers can benefit from Catena-X technology:
 
 ...
+
+
 
 ## Use Case
 
@@ -140,8 +175,6 @@ Enable project managers and designers to select the geometric quality of models 
 
 ## User Journey
 
-
-
 ```mermaid
 flowchart TD
     subgraph Customer
@@ -209,6 +242,12 @@ The receiving system cannot handle binary payloads natively.
 There are constraints on the transport protocol (e.g., HTTP APIs that expect text).
 Interoperability and Clarity:
 The encoding method (e.g., base64) must be clearly specified in the aspect model’s schema or metadata (such as the contentType property in BinaryExchange). This ensures that all participants know how to decode and use the file data, avoiding misinterpretation or data corruption.
+
+## TODOS 
+- User Journey muss gestressed werden
+- Sequence Diagramm (was passiert unter der Haube) (siehe Requeriements KIT, und Mastdata Doc)
+- Structure Unterschiede (aka SBOM)
+
 
 ## Notice
 
