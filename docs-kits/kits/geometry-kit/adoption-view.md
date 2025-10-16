@@ -218,6 +218,52 @@ flowchart LR
 - DMU Light Review with Bounding Box and without Geometry load
 -->
 
+
+### User Journey System Flow
+
+## System Overview: Data Flow Across Partners
+
+The following diagram shows the main systems involved in the user journey, clearly differentiating between both partners. Each partner has its own data source, EDC, and business application. The Digital Twin Registry enables discovery and linkage across the ecosystem.
+
+```mermaid
+flowchart LR
+    subgraph Partner1["Partner 1 (Data Producer)"]
+        P1DS["Data Source<br/>(3D Data Persist/Update)"]
+        P1EDC["EDC"]
+        P1APP["Business App<br/>(Create/Publish/Review Feedback)"]
+    end
+
+    subgraph Partner2["Partner 2 (Data Consumer)"]
+        P2DS["Data Source<br/>(Local Copy/Updates)"]
+        P2EDC["EDC"]
+        P2APP["Business App<br/>(Discover/Review/Annotate)"]
+    end
+
+    DTR["Digital Twin Registry"]
+
+    %% Data Producer Flows
+    P1APP -- "Update 3D Data" --> P1DS
+    P1DS -- "Register/Update Twin & Submodel" --> DTR
+    P1DS -- "Expose Data" --> P1EDC
+    P1EDC -- "Offer/Exchange Data" --> P2EDC
+
+    %% Data Consumer Flows
+    P2EDC -- "Request Data" --> P1EDC
+    P2EDC -- "Provide Data" --> P2DS
+    P2DS -- "Load Data" --> P2APP
+    P2APP -- "Review/Annotate" --> P2DS
+
+    %% Discovery
+    P2APP -- "Discover Twin/Model" --> DTR
+```
+
+**Description:**
+- Each partner has its own Data Source (for persisting and updating 3D data), EDC (for secure data exchange), and Business Application (for creation, review, and annotation).
+- The Digital Twin Registry enables discovery and linkage of geometry data across partners.
+- Data flows from Partner 1's app to their data source, is registered in the DTR, and exchanged via EDC to Partner 2, where it is consumed and reviewed in their own environment.
+
+
+
 ## Example Files and Understanding
 
 
