@@ -33,6 +33,11 @@ Describe Relevant Related Standards:
 SARAH 
 
 
+Example Files and Understanding: 
+- Describe participant overview (how many and role) 
+- Descibe Overall "Product" the full bike
+- Descibe SupplyChain of participants (Who supplies what to whom)
+- Provide description of 3D Data set Motorbike with definition of participants and data ownership
  
  -->
 
@@ -175,21 +180,107 @@ Enable project managers and designers to select the geometric quality of models 
 
 ## User Journey
 
+The following diagram illustrates the collaborative engineering workflow between OEM/BTV and supplier within the Catena-X ecosystem, focusing on the exchange and management of 3D geometry data.
+
 ```mermaid
 flowchart TD
-    subgraph Customer
-        A["Pull Geometry"]
-        G[End]
+    subgraph "BTV (OEM)"
+        A1["Role Distribution"]
+        A2["Request Review"]
+        A3["Verify Changes"]
+        A4["Final Approval"]
     end
 
-    subgraph Supplier
-        B["Publish (Initial) Geometry<br /> via EDC into dataspace"]
+    subgraph "Engineering APP (Supplier)"
+        B1["Digital Twin Management"]
+        B2["3D Data Processing"]
+        subgraph "Digital Twin Components"
+            C1["Stammdaten"]
+            C2["3D-Daten"]
+            C3["CAD Models"]
+            C4["Assemblies"]
+        end
     end
 
-    B --> A
-    A --> G
+    subgraph "Engineer (Supplier)"
+        D1["Update 3D Model"]
+        D2["Process Review"]
+        D3["Make Changes"]
+    end
+
+    subgraph "Analysis & Review"
+        E1["DMU Analysis"]
+        E2["Buildroom Check"]
+        E3["Quality Verification"]
+    end
+
+    A1 --> B1
+    B1 --> C1
+    B1 --> C2
+    B1 --> C3
+    B1 --> C4
+    B2 --> |"Process & Validate"|E1
+    B2 --> |"Process & Validate"|E2
+    B2 --> |"Process & Validate"|E3
+    E1 --> D2
+    E2 --> D2
+    E3 --> D2
+    D2 --> |"Changes Required"|D3
+    D3 --> D1
+    D1 --> B1
+    D2 --> |"Approved"|A3
+    A3 --> |"Final Review"|A4
+    A4 --> |"Complete"|B1
 
 ```
+
+The workflow represents the complete engineering collaboration process:
+
+1. **BTV (OEM) Initiation**
+   - Distributes roles and responsibilities
+   - Initiates review requests
+   - Manages final approvals
+
+2. **Engineering APP (Supplier Side)**
+   - Manages Digital Twin data including:
+     - Master data (Stammdaten)
+     - 3D data and CAD models
+     - Assembly structures
+   - Processes and validates 3D content
+   - Maintains data sovereignty
+
+3. **Engineer Activities**
+   - Creates and updates 3D models
+   - Processes review feedback
+   - Implements required changes
+   - Updates Digital Twin information
+
+4. **Analysis & Review Process**
+   - Performs DMU Analysis (clash detection, measurements)
+   - Conducts Buildroom checks (space allocation)
+   - Verifies quality and compliance
+   - Documents review results
+
+The process ensures secure data exchange through Catena-X's EDC infrastructure while maintaining clear ownership and version control of the 3D assets throughout the engineering collaboration lifecycle.
+
+This user journey represents a typical iterative workflow where:
+
+1. Engineer 1 creates or updates a 3D model and publishes it as a Digital Twin with associated geometry data through EDC into the Catena-X dataspace
+2. Engineer 2 discovers and pulls the geometry data into their local engineering environment
+3. Engineer 2 performs various types of engineering analysis:
+   - DMU Analysis including clash detection, measurements, and visual verification
+   - Buildroom Analysis to validate space allocations and clearances
+   - Additional engineering checks as needed
+4. Engineer 2 documents their findings and updates the review status
+5. Engineer 1 receives the feedback and, if necessary, updates the 3D model accordingly
+6. The cycle continues until both parties reach agreement on the design
+
+This collaborative process ensures efficient cross-company engineering while maintaining data sovereignty through the Catena-X infrastructure.
+
+
+## Example Files and Understanding
+
+
 
 ## Associated CX-Standards
 
