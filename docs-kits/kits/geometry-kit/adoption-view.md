@@ -186,7 +186,7 @@ Enable project managers and designers to select the geometric quality of models 
 The following simplified diagram illustrates the circular, iterative flow of engineering collaboration and review for 3D geometry data in Catena-X:
 
 ```mermaid
-flowchart LR
+flowchart TD
 	subgraph Partner_1 ["Partner 1"]
 		A["Create/Update 3D Model"]
 		D["Review Feedback & Update Model if Needed"]
@@ -226,25 +226,32 @@ flowchart LR
 The following diagram shows the main systems involved in the user journey, clearly differentiating between both partners. Each partner has its own data source, EDC, and business application. The Digital Twin Registry enables discovery and linkage across the ecosystem.
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph Partner1["Partner 1 (Data Producer)"]
-        P1DS["Data Source<br/>(3D Data Persist/Update)"]
-        P1EDC["EDC"]
         P1APP["Business App<br/>(Create/Publish/Review Feedback)"]
+		P1DS["Data Source<br/>(3D Data Persist/Update)"]
+        P1EDC["EDC"]
+        
     end
+
+	DTR["Digital Twin Registry"]
 
     subgraph Partner2["Partner 2 (Data Consumer)"]
-        P2DS["Data Source<br/>(Local Copy/Updates)"]
-        P2EDC["EDC"]
         P2APP["Business App<br/>(Discover/Review/Annotate)"]
+		P2DS["Data Source<br/>(Local Copy/Updates)"]
+        P2EDC["EDC"]
+        
     end
 
-    DTR["Digital Twin Registry"]
+    
 
     %% Data Producer Flows
     P1APP -- "Update 3D Data" --> P1DS
-    P1DS -- "Register/Update Twin & Submodel" --> DTR
+	P1DS -- "Read 3D Data" --> P1APP
+    P1EDC <-- "Register/Update Twin & Submodel" --> DTR
+	P2EDC <-- "Register/Update Twin & Submodel" --> DTR
     P1DS -- "Expose Data" --> P1EDC
+	P1EDC -- "Receive Data" --> P1DS
     P1EDC -- "Offer/Exchange Data" --> P2EDC
 
     %% Data Consumer Flows
