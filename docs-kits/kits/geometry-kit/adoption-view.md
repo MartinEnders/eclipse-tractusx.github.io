@@ -179,22 +179,29 @@ Enable project managers and designers to select the geometric quality of models 
 
 ![Customer Journey](resources/example-picture.jpg)
 
+
+
 ## User Journey
 
 The following simplified diagram illustrates the circular, iterative flow of engineering collaboration and review for 3D geometry data in Catena-X:
 
 ```mermaid
 flowchart LR
-    A["Partner 1:<br/>Create/Update 3D Model<br/>Publish Digital Twin via EDC"]
-    B["Partner 2:<br/>Pull Geometry Data<br/>Review & Annotate (DMU, Bauraum, etc.)"]
-    C["Partner 2:<br/>Accept / Request Changes / Comment"]
-    D["Partner 1:<br/>Review Feedback<br/>Update Model if Needed"]
+	subgraph Partner_1 ["Partner 1"]
+		A["Create/Update 3D Model"]
+		D["Review Feedback & Update Model if Needed"]
+	end
 
-    A --> B
-    B --> C
-    C --> D
-    D -- "If changes required" --> A
-    C -- "If accepted" --> E["Process Complete"]
+	subgraph Partner_2 ["Partner 2"]
+		B["Pull Geometry Data<br/>Review & Annotate (DMU, Bauraum, etc.)"]
+		C["Accept / Request Changes / Comment"]
+	end
+
+	A --> B
+	B --> C
+	C --> D
+	D -- "If changes required" --> A
+	C -- "If accepted" --> E["Process Complete"]
 ```
 
 **Description:**
@@ -205,12 +212,25 @@ flowchart LR
 4. Partner 1 reviews the feedback and, if needed, updates the model and republishes a new Digital Twin.
 5. The cycle repeats until the geometry is accepted, ensuring efficient, sovereign, and standards-based cross-company collaboration.
 
+<!-- Specials within the scenario: 
+
+- Geometry Detail Exchange
+- DMU Light Review with Bounding Box and without Geometry load
+-->
 
 ## Example Files and Understanding
 
 
 
 ## Associated CX-Standards
+
+### Single Level Scene Node 
+urn:samm:io.catenax.single_level_scene_node:1.0.0#
+
+The "Single Level Scene Node" is a core concept in the Catena-X Geometry Aspect Model, providing a standardized way to represent a geometric object and its direct properties within a 3D scene as part of a Digital Twin in Catena-X. Each node encapsulates references to geometry data (such as CAD files or tessellated meshes), transformation information (position, rotation, scale), and metadata. This structure simplifies data exchange and integration across systems, ensuring that each geometric entity can be independently described, linked, and consumed by partners.
+
+For full details, see the Catena-X [Geometry Standard (CX-0156)](https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-release-bundle/standards/CX-0156-Geometry/CX-0156-Geometry.md).
+
 
 ### Masterdata
 https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-CX-XXXX-Geometry/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md 
