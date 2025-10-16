@@ -23,7 +23,7 @@ Section Use Case
 
 
 Section: Geometry understanding
-- Description of structure of 3D Data vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH / HANNES 
+- Description of structure of 3D Data vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH 
 
 
 Describe Relevant Related Standards: 
@@ -38,6 +38,7 @@ Example Files and Understanding:
 - Descibe Overall "Product" the full bike
 - Descibe SupplyChain of participants (Who supplies what to whom)
 - Provide description of 3D Data set Motorbike with definition of participants and data ownership
+MICHAEL 
  
  -->
 
@@ -180,102 +181,29 @@ Enable project managers and designers to select the geometric quality of models 
 
 ## User Journey
 
-The following diagram illustrates the collaborative engineering workflow between OEM/BTV and supplier within the Catena-X ecosystem, focusing on the exchange and management of 3D geometry data.
+The following simplified diagram illustrates the circular, iterative flow of engineering collaboration and review for 3D geometry data in Catena-X:
 
 ```mermaid
-flowchart TD
-    subgraph "BTV (OEM)"
-        A1["Role Distribution"]
-        A2["Request Review"]
-        A3["Verify Changes"]
-        A4["Final Approval"]
-    end
+flowchart LR
+    A["Partner 1:<br/>Create/Update 3D Model<br/>Publish Digital Twin via EDC"]
+    B["Partner 2:<br/>Pull Geometry Data<br/>Review & Annotate (DMU, Bauraum, etc.)"]
+    C["Partner 2:<br/>Accept / Request Changes / Comment"]
+    D["Partner 1:<br/>Review Feedback<br/>Update Model if Needed"]
 
-    subgraph "Engineering APP (Supplier)"
-        B1["Digital Twin Management"]
-        B2["3D Data Processing"]
-        subgraph "Digital Twin Components"
-            C1["Stammdaten"]
-            C2["3D-Daten"]
-            C3["CAD Models"]
-            C4["Assemblies"]
-        end
-    end
-
-    subgraph "Engineer (Supplier)"
-        D1["Update 3D Model"]
-        D2["Process Review"]
-        D3["Make Changes"]
-    end
-
-    subgraph "Analysis & Review"
-        E1["DMU Analysis"]
-        E2["Buildroom Check"]
-        E3["Quality Verification"]
-    end
-
-    A1 --> B1
-    B1 --> C1
-    B1 --> C2
-    B1 --> C3
-    B1 --> C4
-    B2 --> |"Process & Validate"|E1
-    B2 --> |"Process & Validate"|E2
-    B2 --> |"Process & Validate"|E3
-    E1 --> D2
-    E2 --> D2
-    E3 --> D2
-    D2 --> |"Changes Required"|D3
-    D3 --> D1
-    D1 --> B1
-    D2 --> |"Approved"|A3
-    A3 --> |"Final Review"|A4
-    A4 --> |"Complete"|B1
-
+    A --> B
+    B --> C
+    C --> D
+    D -- "If changes required" --> A
+    C -- "If accepted" --> E["Process Complete"]
 ```
 
-The workflow represents the complete engineering collaboration process:
+**Description:**
 
-1. **BTV (OEM) Initiation**
-   - Distributes roles and responsibilities
-   - Initiates review requests
-   - Manages final approvals
-
-2. **Engineering APP (Supplier Side)**
-   - Manages Digital Twin data including:
-     - Master data (Stammdaten)
-     - 3D data and CAD models
-     - Assembly structures
-   - Processes and validates 3D content
-   - Maintains data sovereignty
-
-3. **Engineer Activities**
-   - Creates and updates 3D models
-   - Processes review feedback
-   - Implements required changes
-   - Updates Digital Twin information
-
-4. **Analysis & Review Process**
-   - Performs DMU Analysis (clash detection, measurements)
-   - Conducts Buildroom checks (space allocation)
-   - Verifies quality and compliance
-   - Documents review results
-
-The process ensures secure data exchange through Catena-X's EDC infrastructure while maintaining clear ownership and version control of the 3D assets throughout the engineering collaboration lifecycle.
-
-This user journey represents a typical iterative workflow where:
-
-1. Engineer 1 creates or updates a 3D model and publishes it as a Digital Twin with associated geometry data through EDC into the Catena-X dataspace
-2. Engineer 2 discovers and pulls the geometry data into their local engineering environment
-3. Engineer 2 performs various types of engineering analysis:
-   - DMU Analysis including clash detection, measurements, and visual verification
-   - Buildroom Analysis to validate space allocations and clearances
-   - Additional engineering checks as needed
-4. Engineer 2 documents their findings and updates the review status
-5. Engineer 1 receives the feedback and, if necessary, updates the 3D model accordingly
-6. The cycle continues until both parties reach agreement on the design
-
-This collaborative process ensures efficient cross-company engineering while maintaining data sovereignty through the Catena-X infrastructure.
+1. Partner 1 (Supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data via EDC into the Catena-X dataspace.
+2. Partner 2 (Customer/Partner) pulls the geometry data into their environment and performs review/analysis (e.g., DMU Analysis, Buildroom checks).
+3. Partner 2 annotates, comments, and either accepts the data or requests changes.
+4. Partner 1 reviews the feedback and, if needed, updates the model and republishes a new Digital Twin.
+5. The cycle repeats until the geometry is accepted, ensuring efficient, sovereign, and standards-based cross-company collaboration.
 
 
 ## Example Files and Understanding
