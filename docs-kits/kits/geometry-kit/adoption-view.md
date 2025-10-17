@@ -273,7 +273,111 @@ flowchart TB
 
 ## Example Files and Understanding
 
+**Basic Example** - 2 participants
 
+This simplified guide uses only two participants:
+
+- Participant 1 (OEM): Responsible for the bike frame and assembling components from suppliers.
+- Participant 2 (Supplier): Supplies the engine (drive).
+
+### Participant 1 Perspective (Frame and Assembling)
+
+When running the app you will see a panel "Catena-X View" on the left and the webvis viewer on the right.
+
+Start by looking at the left panel ("Catena-X View"):
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-participant-1-AAS.png" alt="Basic Example 1" width="400"/>
+  <img src="./resources/basic-example/img/Basic-example-participant-2-AAS.png" alt="Basic Example 2" width="400"/>
+</div>
+
+1. At the top is the participant list ("Participant 1", "Participant 2").
+   - Participant 1 is the OEM (frame + assembly), gold color.
+   - Participant 2 is the engine supplier, green color.
+
+2. The view initially shows the Asset Administration Shell (AAS) for Participant 1.
+   - Each AAS tile contains meta information from its JSON AAS file.
+   - On the right side of an AAS tile is an expand button ("+"). Click to reveal linked aspect models.
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-participant-1-AAS-linked-aspect-models.png" alt="Basic Example 1" width="800"/>
+</div>
+
+3. Typical linked aspect models for Participant 1:
+   - PartTypeInformation
+   - 3dDataAs-X
+   - SingleLevelBOMAs-X
+   - The last two may link further to child aspect models.
+
+4. Use the expand ("+") and collapse ("-") buttons to navigate the hierarchy.
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-2.png" alt="Basic Example 2" width="800"/>
+</div>
+
+5. 3D model visualization:
+   - When a "3dModel" aspect model tile appears, it shows a "3D" button.
+   - Click the "3D" button to toggle the corresponding 3D asset in the webvis viewer on the right.
+   - Clicking again removes the asset from the viewer.
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-3.png" alt="Basic Example 2" width="800"/>
+</div>
+
+6. Ownership color cue:
+   - Each tile has a thin color stripe on its left that matches the participant color in the top list.
+   - This color indicates the owner of the aspect model.
+   - When a 3D asset is rendered, the viewer colorizes the model with the owner's color.
+
+7. Access restrictions:
+   - Some tiles may be grayed out with a lock icon — these are not accessible to the currently selected participant (One-up, one-down principle).
+
+8. Switch perspective:
+   - Click a different participant in the list to change the visible AAS and aspect-model perspective.
+
+### Participant 2 Perspective (Engine Supplier)
+
+When you click "Participant 2" at the top:
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-participant-2-AAS.png" alt="Basic Example 2" width="800"/>
+</div>
+
+1. The AAS switches to the supplier’s AAS (green stripe).
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-participant-2-ASS-linked-aspect-models.png" alt="Basic Example 2" width="800"/>
+</div>
+
+2. Expand it to see:
+   - PartTypeInformation (engine)
+   - 3dDataAs-X (engine geometry container)
+   - SingleLevelBOMAs-X (engine BOM; upstream OEM assembly references may appear locked)
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-participant-2-3d-data.png" alt="Basic Example 2" width="800"/>
+</div>
+
+3. The engine 3D model tile shows a "3D" button. Click to load/unload the engine geometry in the viewer (it appears in green).
+
+4. OEM-owned frame/engine geometry and deeper OEM aspects are locked (one-up, one-down principle).
+
+5. Switch back to Participant 1 to re-enable viewing combined frame + engine assembly.
+
+<div style="display: flex; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/Basic-example-5.png" alt="Basic Example 2" width="800"/>
+</div>
+
+This highlights reciprocal visibility: OEM can view and load supplier engine geometry; supplier can view and load only its own engine geometry and sees OEM-only aspects as locked.
+
+Example files:
+- Basic example files are available in ./resources/basic-example/STEP/ (e.g., asm_frame.step from Participant 1 and asm_drive.step from Participant 2).
+
+This simplified adoption view focuses on the small-scope scenario: Participant 1 (OEM) owns the bike frame and overall assembly; Participant 2 supplies the engine. The UI demonstrates how to explore AAS aspect models and visualize owned 3D assets with clear ownership coloring and access controls.
+
+**Advanced Example** - Multiple participants replicating a supply chain
+
+TBC if this is required.
 
 ## Associated CX-Standards
 
