@@ -326,6 +326,13 @@ Here, the workflow starts on the left and progressed to the right as a function 
 
 8. Once the OEM is satisfied, the Aspect Model for the combined Frame and Drive Train can be approved. This is the last step in this example.
 
+<br>
+<div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
+  <img src="./resources/basic-example/img/bike-frame-and-drive-train.png" alt="Bike frame and drive train combined" width="300"/>
+</div>
+<br>
+
+In theory, both the OEM and Tier 1 can view each others geometry data throughout the entire workflow, following the 1 up 1 down principal, after the initial sharing of participant's Digital Twin.
 
 
 ## Associated CX-Standards
