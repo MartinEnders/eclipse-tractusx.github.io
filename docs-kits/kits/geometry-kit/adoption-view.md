@@ -334,6 +334,28 @@ Here, the workflow starts on the left and progressed to the right as a function 
 
 In theory, both the OEM and Tier 1 can view each others geometry data throughout the entire workflow, following the 1 up 1 down principal, after the initial sharing of participant's Digital Twin.
 
+#### Table of Data Ownership
+
+<br>
+<div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
+<table>
+  <tr>
+    <th><strong>OEM</strong></th>
+    <th><strong>Tier 1</strong></th>
+  </tr>
+  <tr>
+    <td>asm_frame.step</td>
+    <td>asm_drive.step</td>
+  </tr>
+  <tr>
+    <td>SLSN_frame_payload.json</td>
+    <td>SLSN_drive_payload.json</td>
+  </tr>
+</table>
+</div>
+<br>
+
+The table above summarizes who owns what data during evolution of the workflow.
 
 ## Associated CX-Standards
 
