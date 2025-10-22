@@ -23,7 +23,7 @@ Section Use Case
 
 
 Section: Geometry understanding
-- Description of structure of 3D Data vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH 
+- Description of structure of Geometry vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH 
 
 
 Describe Relevant Related Standards: 
@@ -41,8 +41,6 @@ Example Files and Understanding:
 MICHAEL 
  
  -->
-
-
 
 ## Vision & Mission
 
@@ -220,6 +218,27 @@ flowchart TD
 
 
 ### User Journey System Flow
+
+## Geometry understanding
+
+The following section describes the difference in structure of the SingleLevelSceneNode and the BOM structure. It also makes clear how both work together. The SingleLevelSceneNode and SingleLevelBOM aspect models in Catena-X serve two complementary but clearly distinct purposes.
+
+The SingleLevelSceneNode defines the geometric and spatial structure within a single digital twin. It organizes geometry data by describing how individual objects or assemblies are positioned, transformed, and related to one another inside that twin. Each SingleLevelSceneNode represents a geometric object or group of objects, identified by its own Catena-X ID. Through its child items, a scene node can reference other scene nodes, but only those that belong to the same digital twin (and therefore are provided by the same participant). These hierarchical relationships are purely spatial — they define how geometry is composed and arranged, not how different products or business entities are connected or how assebly throughout multiple participants work. The model also contains information such as transformation matrices, bounding volumes, and metadata that describe the geometry’s placement and extent. In essence, the SingleLevelSceneNode provides the internal geometry structure that can be used for visualization, simulation, or digital mock-up purposes.
+
+The BOM structure, on the other hand, describes the logical and semantic product structure that spans multiple digital twins. Instead of focusing on geometry, it defines how different components — potentially originating from different business partners — are related in a product hierarchy. Each child item in the BOM points to the Catena-X ID of another digital twin, allowing an OEM’s twin, for example, to reference parts or sub-assemblies provided by suppliers. Through this model, the overall product composition across the supply chain can be represented consistently. These connected digital twins can contain geometry data as well but don't have to.
+
+In short, SingleLevelSceneNode connects geometry within one digital twin, whereas SingleLevelBOM connects digital twins with each other. The SingleLevelSceneNode model builds the internal spatial view of a twin, while the BOM model builds the external structural view across organizational boundaries — together forming a complete digital representation of both the product’s geometry and its multi-partner assembly hierarchy. The overview can be found in the following table.
+
+| Feature                       | **SingleLevelSceneNode**                                                                                | **SingleLevelBOM**                                                                                            |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Purpose / Function**        | Represents the **spatial and geometric structure** within a single digital twin.                        | Describes the **logical and functional product structure** (bill of materials) across multiple digital twins. |
+| **Scope / Level**             | Applies **only within one digital twin** — i.e., within its own data instance.                          | Connects **multiple digital twins** — components or assemblies across business partners.                      |
+| **Type of Relationship**      | **Geometric / spatial** relationships between parts (e.g., transform, bounding volume).       | **Structural / semantic** relationships (e.g., which component belongs to which assembly).                    |
+| **Main Entity**               | `modelItems` — links to a geometry data object or group of objects.                                                          | `childItem` — describes the relationship between parent and child twins.                       |                          |
+| **Linking Mechanism**         | Via `childItems`: connects **own geometries (SceneNodes)** hierarchically. No external references.      | Via `childItems`: connects **different digital twins**, forming a product structure.                          |
+| **Data Content**              | geometry as data ressource, transformations, bounding volumes.                                               | Product metadata, identifiers, classifications, and references to other aspects (e.g., Part Type).            |
+| **Typical Use Case**          | Visualization, simulation, DMU analysis, or digital mock-up of a geometry model.                                            | Building a complete product structure across company boundaries.                                              |
+
 
 ## System Overview: Data Flow Across Partners
 
