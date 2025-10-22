@@ -294,34 +294,37 @@ flowchart TB
 
 ### Basic Bike Example with 2 Participants
 
-The simplest example of 3D Geometry Data being shared in the Catena-X ecosystem involves the familiar, Consumer / Producer pattern. The following example provides a guide for who owns what data and how these data are shared and used. The example consists of a bike, constituted of 2 components. A bike frame and a drive train. The 3D Geometric data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
+The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the OEM and Tier 1. The following example provides a guide for who owns what data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
 
-<br></br>
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
   <img src="./resources/basic-example/img/bike-frame.png" alt="Bike Frame" width="300"/>
   <img src="./resources/basic-example/img/bike-drive-train.png" alt="Bike Drive Train" width="300"/>
 </div>
-<br></br>
+<br>
 
-In this example, the Producer is the OEM and the Consumer is the Supplier. The OEM owns the bike, builds the frame, and assemble the bike from components provided by various suppliers. Here, a single suppler is considered, that of the Bike Drive Train supplier. It is important to note the Producer / Consumer relationships shown are not static. They can and often do reverse, even within a single workflow, depending on the stage or state of the workflow in question. The diagram below depicts how a joint Producer / Consumer workflow could look, but it is stressed this is only an example, and data sharing workflows will vary in design and complexity.
+In this example, the OEM owns the bike, builds the frame, and assemble the bike from components provided by various suppliers. Here, a single suppler is considered, Tier 1, who provides the bike drive train. The diagram below depicts how the geometry data workflow between the OEM and Tier 1 could look, but it is stressed this is only an example, and data sharing workflows will vary in design and complexity.
 
-<br></br>
+<br>
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
-  <img src="./resources/basic-example/img/bike-2-participants-workflow.jpg" alt="2 Participants Workflow" width="400"/>
+  <img src="./resources/basic-example/img/bike-2-participants-workflow.jpg" alt="2 Participants Workflow" width="1000"/>
 </div>
-<br></br>
+<br>
 
-Here, the workflow starts at the top and progressed downwards with each stage.
+Here, the workflow starts on the left and progressed to the right as a function of time.
 
-1. Initially, the OEM provides access to Digital Master Data (DMD) for the bike, which includes the SceneNode, by posting the asset on the digital twin registry. The STEP file is included in this and is linked to SceneNode via the Binary Exchange. 
+1. Initially, the OEM provides access to the Digital Twin, which includes the Digital Master Data (DMD) and SingleLevelSceneNode, for the bike by posting the asset on the Digital Twin Registry. The STEP file is included in this and is linked to SingleLevelSceneNode via the Binary Data Exchange. 
 
-2. The Suppler, can assess the DMD and associated assets via the digital twin registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. The Supplier analyses the OEM's geometry, in this instance the bike frame, but this could also be a Bauraum or equivalent.
+2. The Tier 1 can then access and assess the Digital Twin and associated assets via the Digital Twin Registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. The Tier 1 analyses the geometry data provided by the OEM, in this instance the bike frame, but this could also be a Bauraum or equivalent.
 
-3. The Supplier iterates on their component, in this instance the Drive Train STEP file and associated data, to ensure it conforms to the requirements of the OEM. The Suppler then provides access to their DMD and SceneNode via the Digital Twin Registry so that the OEM can access it.
+3. The Tier 1 creates their own Digital Twin for the drive train, including the STEP file, linked to SingleLevelSceneNode via the Binary Data Exchange, and iterates on it to meet the OEM's constrains and specifications.
 
-4. The OEM can then use this data to inspect the Suppliers component, provide feedback and answer questions. Both parts can be used by both parties to perform DMU Analysis. 
+4. When ready, the Tier 1 provides access to their Digital Twin of the drive train. The OEM can then use this data to inspect the Tier 1 component, provide feedback and answer questions. Both parts can be used by both parties to perform DMU Analysis. 
 
-5. Once the OEM is satisfied, the Aspect Model for the combined Frame and Drive Train can be approved. This is the last step in this example.
+6. The Tier 1 then incorporates feedback from the OEM into their design and continues to iterate. 
+
+7. Once again, when ready, the Tier 1 provides access to their updated Digital Twin of the drive train.
+
+8. Once the OEM is satisfied, the Aspect Model for the combined Frame and Drive Train can be approved. This is the last step in this example.
 
 
 
