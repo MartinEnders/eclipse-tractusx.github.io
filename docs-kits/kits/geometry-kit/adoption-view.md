@@ -337,13 +337,13 @@ Media Type types are strings like `application/step` or `model/jt` that identify
 The Internet Assigned Numbers Authority (IANA) maintains a registry of official Media Type types. For an example of CAD and 3D model data, the following Media Type types are currently defined by IANA:
 
 - `model/step` — for STEP files (ISO 10303-21, .stp/.step)
-- `model/iges` — for IGES files (.igs/.iges)
 - `model/JT` - for JT (Jupiter Tesselation) files
+- `model/iges` — for IGES files (.igs/.iges)
 - `model/stl` - for STL Files
 - `model/gltf+json` and `model/gltf-binary` — for glTF 3D models (.gltf, .glb)
 - `model/obj` — for Wavefront OBJ files (.obj)
 
-Other formats commonly used in industry, such as JT (`model/jt`), STL (`model/stl`), or native CAD formats (e.g., CATIA, NX, Creo), may not have official IANA registrations but are often used with custom or vendor-specific Media Type types. The Binary Exchange model allows for both standard and custom Media Type types to be referenced, supporting a wide range of geometry data formats in Catena-X.
+Other formats commonly used in industry, such as native CAD formats (e.g., CATIA, NX, Creo), may not have official IANA registrations but are often used with custom or vendor-specific Media Type types. The Binary Exchange model allows for both standard and custom Media Type types to be referenced, supporting a wide range of geometry data formats in Catena-X.
 
 For a detailed overview of the supported Media Types see: https://www.iana.org/assignments/media-types/media-types.xhtml
 
