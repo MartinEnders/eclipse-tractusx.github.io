@@ -46,138 +46,70 @@ MICHAEL
 
 ### Vision
 
-The vision of the **3D KIT** is to enable secure and sovereign exchange of engineering 3D information across the entire value chain and all n-tier levels in Catena-X. It focuses on making 3D assets—such as CAD models, simulation data, and their associated metadata from PLM and related systems—discoverable, accessible, and reusable for data-driven use cases without compromising data sovereignty.
+The vision of the **Geometry KIT** is to enable secure and sovereign exchange of engineering geometry information across the entire value chain and all n-tier levels in Catena-X. It focuses on making 3D assets—such as CAD models and their associated metadata from Data-Management-Systems — discoverable, accessible, and reusable for data-driven use cases without compromising data sovereignty.
 
-The Kit provides a uniform, standards-based foundation for interoperability between Business Partners when sharing 3D information. It covers master data (Stammdaten), geometric and simulation data, as well as derived 2D artifacts like PDF technical drawings, ensuring that participants can build consistent, trusted 3D data chains throughout the lifecycle of products and components.
+The Kit provides a uniform, standards-based foundation for interoperability between Business Partners when sharing geometry information. It covers master data (Stammdaten) and geometry, ensuring that participants can build consistent, trusted engineering data chains throughout the lifecycle of products and components.
 
 ### Mission
 
-The 3D KIT bundles the necessary Catena-X standards, profiles, APIs, semantic models, and reference implementations to publish, discover, request, and consume 3D information in the dataspace. It provides clear guidance and tooling to map data from enterprise PLM/CAE systems into Catena-X-compliant representations and exchange large files efficiently and securely.
+The Geometry KIT bundles the necessary Catena-X standards, profiles, APIs, semantic models, and reference implementations to publish, discover, request, and consume geometry information in the dataspace. It provides clear guidance and tooling to map data from enterprise PLM/CAE systems into Catena-X-compliant representations and exchange files efficiently and securely.
 
-By adopting and aligning existing Catena-X standards (e.g., Digital Twins, Data Chain, and BinaryDataExchange) and complementing them where needed for 3D, the 3D KIT enables rapid implementation of multiple use cases. Seamless interoperability with the Connector KIT and adjacent Kits is a priority to ensure end-to-end adoption across the ecosystem, including support for 3D master data, geometry and 2D PDF drawings.
+By adopting existing Catena-X standards the Geometry KIT enables rapid implementation of multiple engineering use cases around geometry data exchange.
 
 
 ## Business Value & Benefits
 
 ### Business Value
-
-The "Geometry-KIT" provides guidelines and standards, such as semantic models and data exchange processes, which help companies create a reliable and sovereign data exchange system with their partners.
-
-This reduces cost and effort needed to integrate data-driven engineering processes into their operations and IT systems.
-
-Since this KIT is built on the Industry Core KIT and will be closely connected to upcoming other KITSs within the Engineering Domain, investment and implementation costs to integrate requirement services are reduced.
-
-In the product design and engineering phase, companies must collaborate closely with partners to co-engineer, plan, and industrialize products. 3D data is the core medium of that collaboration, yet exchange today is cumbersome, redundant, and error-prone. The 3D KIT provides a consistent way to share and consume 3D information (CAD and derived 2D drawings) via Catena-X—reducing cycle times, avoiding duplicate data silos, and improving quality through standardized semantics, interfaces, and secure large-file transfer. At a high level, the initial focus areas are supplier updates to master and 3D data, and BTV-side processing and adoption of 3D data.
-
-By leveraging Catena-X standards, participants can automate early collaboration processes, ensure up-to-date master and geometry data across partners, and integrate directly with enterprise PLM/CAE systems. This lowers onboarding effort, enables repeatable integrations, and accelerates time-to-value for 3D-centric use cases.
-
-As context, the two highlighted scenarios fit a broader cross-company 3D engineering flow: one party authors and publishes updated master/geometry data, while another discovers, validates, and operationalizes it within PLM/CAE and downstream processes. This framing keeps the Kit applicable to many role constellations beyond a single supplier–BTV setup.
+The Geometry KIT enables companies to build secure, cross-company engineering collaboration use cases within Catena-X. By providing standardized models and interfaces for 3D data exchange, it reduces integration costs, accelerates development cycles, and improves data quality. Companies benefit from faster iterations, streamlined onboarding, and robust IP protection—leveraging Catena-X’s architecture to collaborate efficiently while maintaining data sovereignty.
 
 ### Todays Challenge
 
-As product development becomes more and more cross-company, the ...
 
-### Benefits for OEM, SME and Solution Provider
+Today, companies face significant challenges when exchanging engineering-grade geometry data across organizational boundaries. Critical 3D CAD data is often locked away in isolated systems, accessible only to a few experts. Sharing geometry with partners typically requires manual exports, data conversions, or the use of static screenshots and lightweight viewers—processes that are time-consuming, error-prone, and result in loss of detail and context. These workarounds create data silos, slow down collaboration, and increase the risk of inconsistencies and downstream errors.
 
-#### OEM and large automotive suppliers
+Security and intellectual property protection add further complexity: companies must ensure that sensitive design data is only accessible to authorized partners, while still enabling efficient collaboration. The lack of standardized, automated processes for geometry exchange leads to duplicated efforts, high integration costs, and limited ability to leverage 3D data throughout the product lifecycle. As a result, engineering teams struggle to keep data up-to-date, respond quickly to changes, and fully realize the value of their 3D assets in cross-company projects.
 
-The Geometry Kit presents a transformative solution for OEMs and large automotive suppliers, fundamentally optimizing their ...
+### Benefits for OEM, Suppliers and Solution Provider
 
-#### SME
+#### OEM and suppliers
+The Geometry KIT empowers OEMs and suppliers to streamline cross-company engineering collaboration. By bundling key standards—such as the Geometry Standard, SingleLevelSceneNode, Masterdata Standard, Binary Exchange, and the Digital Twin Standard — it enables essential use cases like DMU analysis to be implemented efficiently within Catena-X. Leveraging the Catena-X architecture, OEMs and suppliers can securely exchange 3D data and collaborate across company borders, with IP protection and data sovereignty ensured by the underlying Catena-X design. This reduces manual effort, accelerates design cycles, improves data consistency, and enables automated feedback loops and faster onboarding throughout the supply chain.
 
-The Geometry Kit offers significant advantages for Small and Medium-sized Enterprises (SMEs), streamlining what can often be a complex and resource-intensive aspect of their operations. One of the most impactful benefits is the simplification of the ...
 
 #### Solution Provider
-
-Catena-X offers solution providers a variety of strategic advantages to leverage their innovation capabilities and strengthen their market position beyond the automotive industry. Here are some examples of how solution providers can benefit from Catena-X technology:
-
-...
-
-
+By implementing and aligning their offerings with Catena-X, solution providers can position their products for secure, standards-based data exchange and connect to a growing network of participants within the Catena-X ecosystem. This alignment puts their solutions at the forefront of modern geometry data exchange, enabling seamless integration, interoperability, and access to new business opportunities across industries. Solution providers benefit from increased market relevance, the ability to address customer requirements for secure collaboration, and the potential to drive innovation in digital engineering workflows.
 
 ## Use Case
 
-All of the following use cases rely on shared 3D data and cross-company collaboration. The 3D KIT provides the common APIs, semantic models, and secure large-file exchange to enable them consistently across partners.
 
-### DMU Analysis (Digital Mock-Up)
+### Digital Mock-Up Analysis: A Cross-Company Collaboration Use Case
 
-Analyze CAD data with semi-advanced techniques—such as measurements, clash detection, sectioning, and visual heatmaps — to verify that requirements are met across design, manufacturing, packaging, interfaces, accessibility, and serviceability. Supports early-stage maturity assessments and issue resolution for product designs.
+Digital Mock-Up (DMU) Analysis is a central use case in the design phase of physical products, where OEMs and suppliers must collaborate closely to develop and adjust their products in line with requirements from both sides. During this phase, engineers regularly review, comment, and align on the current development status, communicating necessary changes and feedback iteratively. DMU Analysis enables teams to ensure the evolving product meets all requirements before physical prototypes are built.
 
-#### Key Capabilities
+At its core, DMU Analysis empowers engineers to perform essential digital engineering tasks on 3D models and assemblies—such as taking precise measurements, comparing design variants, inspecting internal and external structures, and visualizing key properties or changes. These capabilities allow teams to validate fit, function, and compliance with requirements, identify potential issues early, and communicate findings clearly—all before any physical prototype is built.
 
-- Clash detection and gap measurement
-- Assembly positioning and verification
-- Flexible selection of coordinate systems (part or vehicle origin)
-- Visualization of individual components and composite assemblies
+This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based 3D data sharing possible across company boundaries.
 
-#### Relevant Information & Inputs
+#### High-Level Scenario
 
-- 3D CAD Model reference
-- Bounding boxes and spheres for spatial analysis
-- Vehicle origin (global positioning) and component origin (local positioning)
-- Translation, rotation, and constraints
-- Embedded kinematic data
+In a typical DMU Analysis workflow, one partner (e.g., a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner (e.g., an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
 
+#### Practical Variants of DMU Analysis
 
-### Buildroom (Bauraum) Analysis
+While the core DMU Analysis workflow remains consistent, its practical application can take several forms depending on the engineering context, data sensitivity, and collaboration needs. The following common variants illustrate how the use case is adapted in real-world scenarios:
 
-Validate space allocations against as-designed geometry to ensure that clearances, assembly and disassembly paths, and manufacturability constraints are respected. This use case helps confirm compliance with reserved installation space and upstream/downstream requirements throughout the engineering process.
+**1. Basic Build Room Analysis**
 
-#### Key Capabilities
+In early design phases, engineers often need to ensure that a future part will fit within the available space of an assembly. For this purpose, it is common to exchange only simplified geometry—such as bounding boxes or build room-defining surfaces—rather than full detailed models. This approach enables rapid spatial checks and early alignment between partners, while minimizing the exposure of sensitive design details.
 
-- Verification of space allocations and envelopes
-- Assessment of clearances and manufacturability constraints
-- Validation of assembly and disassembly paths
-- Compliance checks for installation space and requirements
+**2. Exchange of Different Levels of Detail**
 
-#### Relevant Information & Inputs
+Not all collaboration requires the full geometric detail of a part or assembly. Depending on the phase of development and the sensitivity of the data, participants may choose to share reduced or simplified models (e.g., envelope geometry, de-featured shapes) to protect intellectual property or because such information is sufficient for the task at hand. Conversely, as the design matures and discussions move into detailed engineering, high-fidelity models with full precision may be exchanged to enable thorough analysis and validation.
 
-- 3D CAD model reference
-- Bounding-Boxes and Volume
+**3. Exchange of Different File Formats**
 
-### Level Of Detail: Model Detail 
-Enable project managers and designers to choose the level of model detail shared with partners, adapting to different project phases and collaboration needs. This use case supports both the sharing of simplified models (such as blackbox or shrinkwrap representations that protect sensitive IP) and detailed models for collaborative design. It also allows searching for parts with similar geometry.
+Because partners often use different CAD systems and engineering tools, DMU Analysis scenarios frequently require the exchange of geometry in multiple formats. Common standards include JT and STEP, but native formats from systems like CATIA, Creo, or NX may also be used. The Geometry KIT supports this diversity by enabling the secure, standards-based transfer of various file types, ensuring interoperability across company and system boundaries.
 
-#### Key Capabilities
-
-- Selection of model detail for different project phases
-- Adaptation of model detail for different exchange partners
-- Sharing of blackbox or shrinkwrap models to protect IP
-- Sharing of detailed models for collaborative engineering
-- Search for parts with similar geometry
-
-#### Relevant Information & Inputs
-
-- 3D CAD model reference
-- Basic data (status)
-- Level of Detail of Model
-
-### Level of Detail: Geometric Quality
-Enable project managers and designers to select the geometric quality of models shared with partners, tailored to different project phases and collaboration needs. This use case supports sharing models suitable for clash analysis, supplier development, simulation, and with specified BRep quality, ensuring that the right level of geometric fidelity is available for each scenario.
-
-#### Key Capabilities
-
-- Selection of geometric quality for different project phases
-- Adaptation of geometric quality for different exchange partners
-- Provision of models for clash analysis, supplier development, and simulation
-- Specification of BRep quality (e.g., chordal length, number of nodes)
-- Support for varying geometric fidelity (e.g., NURBS, tessellation)
-
-#### Relevant Information & Inputs
-
-- 3D CAD model reference
-- Tolerancing (middle or maximum model tolerance)
-- Basic data (status)
-- Level of Detail 
-- BRep level of detail parameters (e.g., chordal length, node count)
-
-### Appearances
-
-## Customer Journey
-
-
-
-
+These variants demonstrate the flexibility of DMU Analysis within Catena-X: from lightweight, early-phase checks to detailed, high-precision collaboration, and across a range of data formats. By supporting these different forms, the Geometry KIT ensures that engineers and implementors can tailor their data exchange to the needs of each project phase—balancing efficiency, security, and technical requirements.
 
 ## User Journey
 
@@ -372,38 +304,13 @@ https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-CX-XXXX-G
 
 The Masterdata standard (CX-0154) is essential as it provides the structured, interoperable foundation for exchanging all relevant product master information—including references and metadata for 3D geometry—across the value chain. It ensures that 3D data is always contextualized with accurate, up-to-date master information, enabling seamless discovery, retrieval, and integration of 3D models in Catena-X. Our 3D standard builds on this by specifying how geometry and related data are referenced, described, and linked within the masterdata framework, ensuring consistency, traceability, and interoperability for all 3D-centric use cases. The 3D/geometry standard can be used in combination with master data, but it is not mandatory—3D data may also be exchanged independently where appropriate.
 
-In particular, the masterdata semantic model provides dedicated properties to directly link and reference detailed 3D aspect models:
 
-- `geometryData`: Collects all geometry-related information for a part or product, including:
-	- `reference2DCADDrawing`: Link to the digital 2D CAD drawing (URN or resource).
-	- `reference3DCADDrawing`: Link to the digital 3D CAD model (URN or resource).
-	- `boundingBox`: The minimal 3D box that fully encloses the part geometry (length x width x height). //this might be in 3d data aspect model in the future
-	- `boundingSphere`: Diameter of the smallest possible sphere that fully encloses the part geometry.
-	- `calculatedWeight`: Mass of the part, typically in kilograms, calculated from 3D models.
-	- `calculatedWeightTolerance`: Tolerance range of the calculated (theoretical) weight.
-	- `centerOfGravity`: The calculated center of mass in a coordinate system.
-	- `estimatedWeight`: Estimated mass of the part, typically in kilograms.
-	- `estimatedWeightTolerance`: Tolerance range of the estimated weight.
-	- `momentOfInertia`: Resistance of the part to rotational acceleration around an axis (kg·m²).
-	- `surfaceArea`: Surface area in mm².
-	- `volume`: Volume of the part in mm³.
-	- `weightedWeight`: Actual measured weight of the part.
-	- `weightedWeightTolerance`: Tolerance range of the measured or actual weighted weight.
-
-### Digitaltwin KIT
+### Digital Twin Standard
 The Digital Twin standard (CX-0002) is fundamental for Catena-X as it defines how assets are digitally represented, uniquely identified, and made discoverable across the network. It provides the architecture and APIs for registering, linking, and accessing digital twins and their aspects (such as 3D geometry, simulation, or master data) in a standardized, interoperable way. This enables seamless integration, traceability, and lifecycle management of 3D information and related data, forming the backbone for all data-driven collaboration and automation scenarios in the ecosystem. In the future, the 3D standard will enable Catena-X participants to communicate 3D data and information directly via digital twins, making 3D data exchange an integral part of the Catena-X dataspace.
 
 
 ### BinaryExchange
 The BinaryExchange aspect model is essential for standardized, secure, and interoperable exchange of binary files—such as 3D models—across the Catena-X dataspace. It provides a common structure for describing, referencing, and accessing binary data, including metadata, content type, and access mechanisms via the Dataspace Protocol (DSP).
-
-#### Relevant discussion points for 3D data exchange
-
-- The `SceneGraph` aspect model (our 3D semantic model) organizes 3D scene structure, nodes, and model assets using properties like `modelContainer`, `ModelAsset`, and specifically `dataURI` (for the file location) and `dataType` (for Media type).
-- Instead of linking directly to raw 3D files, the `dataURI` property in `ModelAsset` should reference a `BinaryExchange` aspect instance.
-- The `BinaryExchange` aspect provides properties such as `binaryFile` (with `resourceValue` for the file URI and `contentType` for the MIME type), as well as optional DSP access information (`dspInformation`, `controlPlaneUrl`, `dspAssetId`).
-- This separation ensures that 3D data exchange is managed in a Catena-X-compliant way, supporting traceability, access control, and interoperability for large and sensitive engineering files.
-- The BinaryExchange aspect can be reused for any binary file type, making it a foundational building block for scalable, secure, and flexible 3D data exchange in the ecosystem.
 
 #### Binary vs. Encoded Data:
 Most aspect models, including BinaryExchange, are designed to reference or link to binary files (e.g., via a URI), not to embed the raw file content directly in the aspect payload. However, in some cases—such as for small files, or when direct embedding is required—binary data may be included as a base64-encoded string.
@@ -416,11 +323,6 @@ The receiving system cannot handle binary payloads natively.
 There are constraints on the transport protocol (e.g., HTTP APIs that expect text).
 Interoperability and Clarity:
 The encoding method (e.g., base64) must be clearly specified in the aspect model’s schema or metadata (such as the contentType property in BinaryExchange). This ensures that all participants know how to decode and use the file data, avoiding misinterpretation or data corruption.
-
-## TODOS 
-- User Journey muss gestressed werden
-- Sequence Diagramm (was passiert unter der Haube) (siehe Requeriements KIT, und Mastdata Doc)
-- Structure Unterschiede (aka SBOM)
 
 
 ## Notice
