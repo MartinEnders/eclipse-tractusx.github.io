@@ -150,6 +150,10 @@ flowchart TD
 
 
 ### User Journey System Flow
+<!-- 
+TODO: 
+Add an overview about the different systems involved and the different file packages and payloads created 
+-->
 
 ## Geometry understanding
 
@@ -291,7 +295,9 @@ The table above summarizes who owns what data during evolution of the workflow.
 
 ## Associated CX-Standards
 
-### Single Level Scene Node 
+### Geometry Standard
+https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-release-bundle/standards/CX-0156-Geometry/CX-0156-Geometry.md
+
 urn:samm:io.catenax.single_level_scene_node:1.0.0#
 
 The "Single Level Scene Node" is a core concept in the Catena-X Geometry Aspect Model, providing a standardized way to represent a geometric object and its direct properties within a 3D scene as part of a Digital Twin in Catena-X. Each node encapsulates references to geometry data (such as CAD files or tessellated meshes), transformation information (position, rotation, scale), and metadata. This structure simplifies data exchange and integration across systems, ensuring that each geometric entity can be independently described, linked, and consumed by partners.
@@ -308,9 +314,38 @@ The Masterdata standard (CX-0154) is essential as it provides the structured, in
 ### Digital Twin Standard
 The Digital Twin standard (CX-0002) is fundamental for Catena-X as it defines how assets are digitally represented, uniquely identified, and made discoverable across the network. It provides the architecture and APIs for registering, linking, and accessing digital twins and their aspects (such as 3D geometry, simulation, or master data) in a standardized, interoperable way. This enables seamless integration, traceability, and lifecycle management of 3D information and related data, forming the backbone for all data-driven collaboration and automation scenarios in the ecosystem. In the future, the 3D standard will enable Catena-X participants to communicate 3D data and information directly via digital twins, making 3D data exchange an integral part of the Catena-X dataspace.
 
+https://catenax-ev.github.io/docs/next/standards/CX-0002-DigitalTwinsInCatenaX
+
+
 
 ### BinaryExchange
 The BinaryExchange aspect model is essential for standardized, secure, and interoperable exchange of binary files—such as 3D models—across the Catena-X dataspace. It provides a common structure for describing, referencing, and accessing binary data, including metadata, content type, and access mechanisms via the Dataspace Protocol (DSP).
+
+https://github.com/eclipse-tractusx/sldt-semantic-models/blob/main/io.catenax.binary_exchange/1.0.0/BinaryExchange.ttl
+
+
+#### Media Type Types for Data Formats
+
+The Binary Exchange aspect model defines a dependency on Media Type types to describe the format of exchanged binary files. A Media Type type (Multipurpose Internet Mail Extensions type) is a standardized way to indicate the nature and format of a file, allowing systems to correctly interpret and process the data. In the context of geometry data exchange, specifying the correct Media Type type ensures that both sender and receiver understand the file format being transferred, enabling interoperability and automation.
+
+**What are Media Type types?**
+
+Media Type types are strings like `application/step` or `model/jt` that identify the file type and its intended usage. They are widely used in web protocols, APIs, and file exchanges to signal how a file should be handled. The first part of a Media Type type indicates the general category (e.g., `application`, `model`, `image`), while the second part specifies the exact format (e.g., `step`, `jt`, `iges`).
+
+**CAD Formats Defined by IANA**
+
+The Internet Assigned Numbers Authority (IANA) maintains a registry of official Media Type types. For an example of CAD and 3D model data, the following Media Type types are currently defined by IANA:
+
+- `model/step` — for STEP files (ISO 10303-21, .stp/.step)
+- `model/iges` — for IGES files (.igs/.iges)
+- `model/JT` - for JT (Jupiter Tesselation) files
+- `model/stl` - for STL Files
+- `model/gltf+json` and `model/gltf-binary` — for glTF 3D models (.gltf, .glb)
+- `model/obj` — for Wavefront OBJ files (.obj)
+
+Other formats commonly used in industry, such as JT (`model/jt`), STL (`model/stl`), or native CAD formats (e.g., CATIA, NX, Creo), may not have official IANA registrations but are often used with custom or vendor-specific Media Type types. The Binary Exchange model allows for both standard and custom Media Type types to be referenced, supporting a wide range of geometry data formats in Catena-X.
+
+For a detailed overview of the supported Media Types see: https://www.iana.org/assignments/media-types/media-types.xhtml
 
 #### Binary vs. Encoded Data:
 Most aspect models, including BinaryExchange, are designed to reference or link to binary files (e.g., via a URI), not to embed the raw file content directly in the aspect payload. However, in some cases—such as for small files, or when direct embedding is required—binary data may be included as a base64-encoded string.
