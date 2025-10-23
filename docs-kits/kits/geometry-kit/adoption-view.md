@@ -175,7 +175,7 @@ Enable project managers and designers to select the geometric quality of models 
 
 ## Customer Journey
 
-![Customer Journey](resources/example-picture.jpg)
+
 
 
 
