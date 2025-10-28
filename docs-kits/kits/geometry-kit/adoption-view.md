@@ -89,6 +89,8 @@ At its core, DMU Analysis empowers engineers to perform essential digital engine
 
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based 3D data sharing possible across company boundaries.
 
+![Use Case Flow Chart](./resources/usecase-flowchart.png)
+
 #### High-Level Scenario
 
 In a typical DMU Analysis workflow, one partner (e.g., a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner (e.g., an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
