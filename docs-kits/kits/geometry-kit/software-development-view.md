@@ -91,7 +91,7 @@ edcC -- Secure Data Exchange --> edcC
 
 ### Geometry Data Exchange Sequence
 
-The sequence diagram illustrates the geometry data exchange flow between a Data Producer (e.g., a Supplier) and a Data Consumer (e.g., an OEM) for DMU Analysis collaboration:
+The sequence diagram illustrates the geometry data exchange flow between a Data Producer *Tier n+1* (e.g., a Supplier) and a Data Consumer *Tier n* (e.g., an OEM) for DMU Analysis collaboration:
 
 1. **Initial Geometry Creation and Publishing**:
 
@@ -127,15 +127,15 @@ The diagram shows the core components involved in this exchange:
 
 ```mermaid
 sequenceDiagram
-    participant supGeoSys as Geometry System Supplier
-    participant supDataSrc as Data Source Supplier
-    participant supDtr as DTR & Submodel Service Supplier
-    participant supEDC as EDC Supplier
+    participant supGeoSys as Geometry System Tier n+1
+    participant supDataSrc as Data Source Tier n+1
+    participant supDtr as DTR & Submodel Service Tier n+1
+    participant supEDC as EDC Tier n+1
 
-    participant oemEDC as EDC OEM
-    participant oemDtr as DTR & Submodel Service OEM
-    participant oemDataSrc as Data Source OEM
-    participant oemGeoSys as Geometry System OEM
+    participant oemEDC as EDC Tier n
+    participant oemDtr as DTR & Submodel Service Tier n
+    participant oemDataSrc as Data Source Tier n
+    participant oemGeoSys as Geometry System Tier n
 
     %% Initial Geometry Creation & Publishing (Supplier)
     supGeoSys->>supDataSrc: Create/Update Geometry Data
@@ -145,12 +145,12 @@ sequenceDiagram
     supDataSrc->>supGeoSys: Confirm Storage & Registration
 
     %% Discovery & Request (OEM) and Data Transfer
-    oemGeoSys->>oemDtr: Discover Available Geometry Twins
-    oemDtr->>oemEDC: Query Digital Twin Registry
-    oemEDC->>supEDC: Request Geometry Data Access
-    supEDC->>supDtr: Request Submodel Data
+    oemGeoSys-->>oemDtr: Discover Available Geometry Twins
+    oemDtr-->>oemEDC: Query Digital Twin Registry
+    oemEDC-->>supEDC: Request Geometry Data Access
+    supEDC-->>supDtr: Request Submodel Data
     supDtr->>supEDC: SingleLevelSceneNode Submodel & Metadata
-    supEDC->>supDataSrc: Request Binary Files
+    supEDC-->>supDataSrc: Request Binary Files
     supDataSrc->>supEDC: Geometry Files (STEP, JT, etc.) via Binary Exchange
     supEDC->>oemEDC: Complete Geometry Data Package
     oemEDC->>oemDataSrc: Store Received Geometry Data
@@ -161,7 +161,7 @@ sequenceDiagram
     oemGeoSys->>oemDataSrc: Perform DMU Analysis & Create Annotations
     oemGeoSys->>oemDataSrc: Store Review Results & Feedback
 
-    Note over supGeoSys, oemGeoSys: Iterative Process: Supplier updates geometry based on feedback, republishes updated Digital Twins, and OEM reviews updates
+    Note over supGeoSys, oemGeoSys: Iterative Process: Tier n+1 updates geometry based on feedback, republishes updated Digital Twins, and Tier n reviews updates
 ```
 
 ## Geometry Aspect Model
