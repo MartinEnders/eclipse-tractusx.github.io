@@ -93,7 +93,7 @@ This frequent, iterative exchange and review of engineering data between partner
 
 #### High-Level Scenario
 
-In a typical DMU Analysis workflow, one partner (e.g., a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner (e.g., an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
+In a typical DMU Analysis workflow, one partner *Tier n+1* (e.g., a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner *Tier n* (e.g., an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
 
 #### Practical Variants of DMU Analysis
 
@@ -163,7 +163,7 @@ The following section describes the difference in structure of the SingleLevelSc
 
 The SingleLevelSceneNode defines the geometric and spatial structure within a single digital twin. It organizes geometry data by describing how individual objects or assemblies are positioned, transformed, and related to one another inside that twin. Each SingleLevelSceneNode represents a geometric object or group of objects, identified by its own Catena-X ID. Through its child items, a scene node can reference other scene nodes, but only those that belong to the same digital twin (and therefore are provided by the same participant). These hierarchical relationships are purely spatial — they define how geometry is composed and arranged, not how different products or business entities are connected or how assebly throughout multiple participants work. The model also contains information such as transformation matrices, bounding volumes, and metadata that describe the geometry’s placement and extent. In essence, the SingleLevelSceneNode provides the internal geometry structure that can be used for visualization, simulation, or digital mock-up purposes.
 
-The BOM structure, on the other hand, describes the logical and semantic product structure that spans multiple digital twins. Instead of focusing on geometry, it defines how different components — potentially originating from different business partners — are related in a product hierarchy. Each child item in the BOM points to the Catena-X ID of another digital twin, allowing an OEM’s twin, for example, to reference parts or sub-assemblies provided by suppliers. Through this model, the overall product composition across the supply chain can be represented consistently. These connected digital twins can contain geometry data as well but don't have to.
+The BOM structure, on the other hand, describes the logical and semantic product structure that spans multiple digital twins. Instead of focusing on geometry, it defines how different components — potentially originating from different business partners — are related in a product hierarchy. Each child item in the BOM points to the Catena-X ID of another digital twin, allowing an *Tier n* twin, for example, to reference parts or sub-assemblies provided by suppliers *Tier n+1*. Through this model, the overall product composition across the supply chain can be represented consistently. These connected digital twins can contain geometry data as well but don't have to.
 
 In short, SingleLevelSceneNode connects geometry within one digital twin, whereas SingleLevelBOM connects digital twins with each other. The SingleLevelSceneNode model builds the internal spatial view of a twin, while the BOM model builds the external structural view across organizational boundaries — together forming a complete digital representation of both the product’s geometry and its multi-partner assembly hierarchy. The overview can be found in the following table.
 
@@ -214,6 +214,7 @@ flowchart TB
     %% Data Consumer Flows
     P2EDC -- "Request Data" --> P1EDC
     P2EDC -- "Provide Data" --> P2DS
+    P2DS -- "Expose Data" --> P2EDC
     P2DS -- "Load Data" --> P2APP
     P2APP -- "Review/Annotate" --> P2DS
 
@@ -232,7 +233,7 @@ flowchart TB
 
 ### Basic Bike Example with 2 Participants
 
-The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the OEM and Tier 1. The following example provides a guide for who owns what data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
+The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the *Tier n* and *Tier n+1*. The following example provides a guide for who owns what data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
 
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
   <img src="./resources/basic-example/img/bike-frame.png" alt="Bike Frame" width="300"/>
@@ -240,29 +241,63 @@ The simplest example of geometry data being shared in the Catena-X ecosystem inv
 </div>
 <br>
 
-In this example, the OEM owns the bike, builds the frame, and assemble the bike from components provided by various suppliers. Here, a single suppler is considered, Tier 1, who provides the bike drive train. The diagram below depicts how the geometry data workflow between the OEM and Tier 1 could look, but it is stressed this is only an example, and data sharing workflows will vary in design and complexity.
+In this example, the *Tier n* owns the bike, builds the frame, and assemble the bike from components provided by various suppliers. Here, a single suppler is considered, *Tier n+1*, who provides the bike drive train. The diagram below depicts how the geometry data workflow between *Tier n* and *Tier n+1* could look, but it is stressed this is only an example, and data sharing workflows will vary in design and complexity.
 
-<br>
-<div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
-  <img src="./resources/basic-example/img/bike-2-participants-workflow.jpg" alt="2 Participants Workflow" width="1000"/>
+```mermaid
+flowchart LR
+    subgraph Timeline [" "]
+        direction LR
+        
+        subgraph TierN ["Tier n"]
+            direction LR
+            OEM1["1. Create & Publish<br/>Digital Twin<br/>• Digital Engineering Master Data<br/>• Single Level Scene Node"] 
+            OEM1 --> OEM2["4. DMU Analysis<br/>& Feedback<br/>via semantic Models DMD and SLSN"]
+            OEM2 --> OEM3["7. Final Approval in Aspect Model<br/>Combined geometry"]
+        end
+        
+        subgraph TierN1 ["Tier n+1"]
+            direction LR
+            SUP1["2. Access & Analyze<br/> geometry<br/>(Bauraum Analysis)"] 
+            SUP1 --> SUP2["3. Create Digital Twin <br/>• SLSN & Binary Exchange<br/>• Meet Tier n constraints"]
+            SUP2 --> SUP3["5. Incorporate<br/>Feedback &<br/>Design Iteration"]
+            SUP3 --> SUP4["6. Publish Updated<br/>Digital Twin"]
+        end
+        
+    end
+    
+    %% Cross-tier interactions
+    OEM1 -.->|"DT Registry<br/>Access"| SUP1
+    SUP2 -.->|"Provide DT<br/>for Review"| OEM2
+    OEM2 -.->|"Feedback &<br/>Comments"| SUP3
+    SUP4 -.->|"Updated DT<br/>Available"| OEM3
+        
+    classDef oemStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000
+    classDef supStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
+    classDef interaction stroke:#ff6f00,stroke-width:2px,stroke-dasharray: 5 5
+    
+    class OEM1,OEM2,OEM3 oemStyle
+    class SUP1,SUP2,SUP3,SUP4 supStyle
+```
+
+<div style="text-align: center; margin: 20px 0; font-family: monospace; font-size: 16px;">
+    ─────────────────── Time ───────────────────&gt;
 </div>
-<br>
 
 Here, the workflow starts on the left and progressed to the right as a function of time.
 
-1. Initially, the OEM provides access to the Digital Twin, which includes the Digital Master Data (DMD) and SingleLevelSceneNode, for the bike by posting the asset on the Digital Twin Registry. The STEP file is included in this and is linked to SingleLevelSceneNode via the Binary Data Exchange. 
+1. **Create & Publish Digital Twin**: Initially, *Tier n* creates and publishes access to the Digital Twin (DT), which includes the Digital Engineering Master Data (DMD) and Single Level Scene Node (SLSN) for the bike by posting the asset on the Digital Twin Registry. The STEP file is included in this and is linked to Single Level Scene Node via the Binary Data Exchange.
 
-2. The Tier 1 can then access and assess the Digital Twin and associated assets via the Digital Twin Registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. The Tier 1 analyses the geometry data provided by the OEM, in this instance the bike frame, but this could also be a Bauraum or equivalent.
+2. **Access & Analyze Geometry**: *Tier n+1* can then access and assess the Digital Twin and associated assets via the Digital Twin Registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. *Tier n+1* analyses the geometry data provided by *Tier n*, in this instance the bike frame, but this could also be a Bauraum or equivalent.
 
-3. The Tier 1 creates their own Digital Twin for the drive train, including the STEP file, linked to SingleLevelSceneNode via the Binary Data Exchange, and iterates on it to meet the OEM's constrains and specifications.
+3. **Create Digital Twin**: *Tier n+1* creates their own Digital Twin for the drive train, including the STEP file, linked to Single Level Scene Node via the Binary Data Exchange, and iterates on it to meet *Tier n* constraints and specifications.
 
-4. When ready, the Tier 1 provides access to their Digital Twin of the drive train. The OEM can then use this data to inspect the Tier 1 component, provide feedback and answer questions. Both parts can be used by both parties to perform DMU Analysis. 
+4. **DMU Analysis & Feedback**: When ready, *Tier n+1* provides access to their Digital Twin of the drive train. *Tier n* can then use this data to inspect the *Tier n+1* component via semantic Models DMD and SLSN, provide feedback and answer questions. Both parts can be used by both parties to perform DMU Analysis.
 
-6. The Tier 1 then incorporates feedback from the OEM into their design and continues to iterate. 
+5. **Incorporate Feedback & Design Iteration**: *Tier n+1* then incorporates feedback from *Tier n* into their design and continues to iterate.
 
-7. Once again, when ready, the Tier 1 provides access to their updated Digital Twin of the drive train.
+6. **Publish Updated Digital Twin**: Once again, when ready, *Tier n+1* provides access to their updated Digital Twin of the drive train.
 
-8. Once the OEM is satisfied, the Aspect Model for the combined Frame and Drive Train can be approved. This is the last step in this example.
+7. **Final Approval in Aspect Model**: Once *Tier n* is satisfied, the Aspect Model for the combined geometry can be approved. This is the last step in this example.
 
 <br>
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
@@ -270,7 +305,7 @@ Here, the workflow starts on the left and progressed to the right as a function 
 </div>
 <br>
 
-In theory, both the OEM and Tier 1 can view each others geometry data throughout the entire workflow, following the 1 up 1 down principal, after the initial sharing of participant's Digital Twin.
+In theory, both the *Tier n* and *Tier n+1* can view each others geometry data throughout the entire workflow, following the 1 up 1 down principal, after the initial sharing of participant's Digital Twin.
 
 #### Table of Data Ownership
 
@@ -278,16 +313,16 @@ In theory, both the OEM and Tier 1 can view each others geometry data throughout
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
 <table>
   <tr>
-    <th><strong>OEM</strong></th>
-    <th><strong>Tier 1</strong></th>
+    <th><strong>Tier n</strong></th>
+    <th><strong>Tier n+1</strong></th>
   </tr>
   <tr>
-    <td>asm_frame.step</td>
-    <td>asm_drive.step</td>
+    <td><a href="./resources/basic-example/STEP/asm_frame.step">asm_frame.step</a></td>
+    <td><a href="./resources/basic-example/STEP/asm_drive.step">asm_drive.step</a></td>
   </tr>
   <tr>
-    <td>SLSN_frame_payload.json</td>
-    <td>SLSN_drive_payload.json</td>
+    <td><a href="./resources/basic-example/json/SLSN_frame_payload.json">SLSN_frame_payload.json</a></td>
+    <td><a href="./resources/basic-example/json/SLSN_drive_payload.json">SLSN_drive_payload.json</a></td>
   </tr>
 </table>
 </div>
@@ -308,7 +343,7 @@ For full details, see the Catena-X [Geometry Standard (CX-0156)](https://github.
 
 
 ### Masterdata
-https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-CX-XXXX-Geometry/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md 
+[https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-CX-XXXX-Geometry/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md ](https://github.com/catenax-eV/product-standardization-prod/blob/main/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md)
 
 The Masterdata standard (CX-0154) is essential as it provides the structured, interoperable foundation for exchanging all relevant product master information—including references and metadata for 3D geometry—across the value chain. It ensures that 3D data is always contextualized with accurate, up-to-date master information, enabling seamless discovery, retrieval, and integration of 3D models in Catena-X. Our 3D standard builds on this by specifying how geometry and related data are referenced, described, and linked within the masterdata framework, ensuring consistency, traceability, and interoperability for all 3D-centric use cases. The 3D/geometry standard can be used in combination with master data, but it is not mandatory—3D data may also be exchanged independently where appropriate.
 
