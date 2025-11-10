@@ -191,12 +191,11 @@ flowchart TB
         
     end
 
-	DTR["Digital Twin Registry"]
-
     subgraph Partner2["Partner 2 (Data Consumer)"]
         P2APP["Business App<br/>(Discover/Review/Annotate)"]
 		P2DS["Data Source<br/>(Local Copy/Updates)"]
         P2EDC["EDC"]
+		DTR["Digital Twin Registry"]
         
     end
 
@@ -205,21 +204,21 @@ flowchart TB
     %% Data Producer Flows
     P1APP -- "Update 3D Data" --> P1DS
 	P1DS -- "Read 3D Data" --> P1APP
-    P1EDC <-- "Register/Update Twin & Submodel" --> DTR
-	P2EDC <-- "Register/Update Twin & Submodel" --> DTR
     P1DS -- "Expose Data" --> P1EDC
 	P1EDC -- "Receive Data" --> P1DS
     P1EDC -- "Offer/Exchange Data" --> P2EDC
 
     %% Data Consumer Flows
+	P2EDC <-- "Register/Update Twin & Submodel" --> DTR
     P2EDC -- "Request Data" --> P1EDC
     P2EDC -- "Provide Data" --> P2DS
     P2DS -- "Expose Data" --> P2EDC
     P2DS -- "Load Data" --> P2APP
     P2APP -- "Review/Annotate" --> P2DS
+    P2APP <-- "Update Twin & Submodel" --> DTR
 
     %% Discovery
-    P2APP -- "Discover Twin/Model" --> DTR
+    P2APP -- "Discover Twin/Model" --> P2EDC
 ```
 
 **Description:**
