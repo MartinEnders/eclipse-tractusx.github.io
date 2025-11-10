@@ -5,50 +5,13 @@ description: 'Adoption View Geometry Kit'
 sidebar_position: 2
 ---
 
-<!-- TODOs: 
-
-
-Reference Implemenation
-- Where is the reference implementation sitting? What repo? 
-
-
-
-Section Use Case
-
-- Use Case selection: WG needs to align on Use Cases we are gonna describe that are relevant
-  - Currently Engineering Collaboration as the Use Case favoured. 
-  
-- User Journey Diagram and description. We need to describe how a user would interact with geometry. Meaning the use case of: Geometry is created -> Shared with Partner 2 -> Partner 2 Reviews -> Gives back to Partner 1 ... see WG Miro HANNES
-- Customer Joureny: https://eclipse-tractusx.github.io/docs-kits/kits/requirements-kit/adoption-view#customer-journey HANNES 
-
-
-Section: Geometry understanding
-- Description of structure of Geometry vs. BOM Structure. See SBOM Standard https://github.com/catenax-eV/product-standardization-prod/blob/R25.09-CX-XXXX-CarSBOM/standards/CX-XXXX-CarSBOM/CX-XXXX-CarSBOM.md#53-tier-n-sbom-propagation-option-1 SARAH 
-
-
-Describe Relevant Related Standards: 
-- Geometry Standard
-- Binary Exchange (Standard or aspect model)
-- Master Data 
-SARAH 
-
-
-Example Files and Understanding: 
-- Describe participant overview (how many and role) 
-- Descibe Overall "Product" the full bike
-- Descibe SupplyChain of participants (Who supplies what to whom)
-- Provide description of 3D Data set Motorbike with definition of participants and data ownership
-MICHAEL 
- 
- -->
-
 ## Vision & Mission
 
 ### Vision
 
 The vision of the **Geometry KIT** is to enable secure and sovereign exchange of engineering geometry information across the entire value chain and all n-tier levels in Catena-X. It focuses on making 3D assets—such as CAD models and their associated metadata from Data-Management-Systems — discoverable, accessible, and reusable for data-driven use cases without compromising data sovereignty.
 
-The Kit provides a uniform, standards-based foundation for interoperability between Business Partners when sharing geometry information. It covers master data (Stammdaten) and geometry, ensuring that participants can build consistent, trusted engineering data chains throughout the lifecycle of products and components.
+The Kit provides a uniform, standards-based foundation for interoperability between Business Partners when sharing geometry information. It covers geometry and touching relevant standars such as Digital Master Engineering Data, ensuring that participants can build consistent, trusted engineering data chains throughout the lifecycle of products and components.
 
 ### Mission
 
@@ -64,15 +27,14 @@ The Geometry KIT enables companies to build secure, cross-company engineering co
 
 ### Todays Challenge
 
-
-Today, companies face significant challenges when exchanging engineering-grade geometry data across organizational boundaries. Critical 3D CAD data is often locked away in isolated systems, accessible only to a few experts, as well as 2D data. Sharing geometry with partners typically requires manual exports, data conversions, or the use of static screenshots and lightweight viewers—processes that are time-consuming, error-prone, and result in loss of detail and context. These workarounds create data silos, slow down collaboration, and increase the risk of inconsistencies and downstream errors.
+Companies face significant challenges when exchanging engineering-grade geometry data across organizational boundaries. Critical 3D CAD data is often locked away in isolated systems, accessible only to a few experts, as well as 2D data. Sharing geometry with partners typically requires manual exports, data conversions, or the use of static screenshots and lightweight viewers—processes that are time-consuming, error-prone, and result in loss of detail and context. These workarounds create data silos, slow down collaboration, and increase the risk of inconsistencies and downstream errors.
 
 Security and intellectual property protection add further complexity: companies must ensure that sensitive design data is only accessible to authorized partners, while still enabling efficient collaboration. The lack of standardized, automated processes for geometry exchange leads to duplicated efforts, high integration costs, and limited ability to leverage geometry data throughout the product lifecycle. As a result, engineering teams struggle to keep data up-to-date, respond quickly to changes, and fully realize the value of their geometry assets in cross-company projects.
 
 ### Benefits for OEM, Suppliers and Solution Provider
 
 #### OEM and suppliers
-The Geometry KIT empowers OEMs and suppliers to streamline cross-company engineering collaboration. By bundling key standards—such as the Geometry Standard, SingleLevelSceneNode, Digital Engineering Masterdata Standard, Binary Exchange, and the Digital Twin Standard — it enables essential use cases like DMU analysis to be implemented efficiently within Catena-X. Leveraging the Catena-X architecture, OEMs and suppliers can securely exchange geometry data and collaborate across company borders, with IP protection and data sovereignty ensured by the underlying Catena-X design. This reduces manual effort, accelerates design cycles, improves data consistency, and enables automated feedback loops and faster onboarding throughout the supply chain.
+The Geometry KIT empowers OEMs and suppliers or any Tier in the supplychain to streamline cross-company engineering collaboration. By bundling key standards—such as the Geometry Standard, SingleLevelSceneNode, Digital Engineering Masterdata Standard, Binary Exchange, and the Digital Twin Standard — it enables essential use cases like DMU analysis to be implemented efficiently within Catena-X. Leveraging the Catena-X architecture, Catena-X participants can securely exchange geometry data and collaborate across company borders, with IP protection and data sovereignty ensured by the underlying Catena-X design. This reduces manual effort, accelerates design cycles, improves data consistency, and enables automated feedback loops and faster onboarding throughout the supply chain.
 
 
 #### Solution Provider
@@ -80,12 +42,11 @@ By implementing and aligning their offerings with Catena-X, solution providers c
 
 ## Use Case
 
-
 ### Digital Mock-Up Analysis: A Cross-Company Collaboration Use Case
 
-Digital Mock-Up (DMU) Analysis is a central use case in the design phase of physical products, where OEMs and suppliers must collaborate closely to develop and adjust their products in line with requirements from both sides. During this phase, engineers regularly review, comment, and align on the current development status, communicating necessary changes and feedback iteratively. DMU Analysis enables teams to ensure the evolving product meets all requirements before physical prototypes are built.
+Digital Mock-Up (DMU) Analysis is a central use case in the design phase of physical products, where Tier n and Tier n+1 must collaborate closely to develop and adjust their products in line with requirements from both sides. During this phase, engineers regularly review, comment, and align on the current development status, communicating necessary changes and feedback iteratively. DMU Analysis enables teams to ensure the evolving product meets all requirements before physical prototypes are built.
 
-At its core, DMU Analysis empowers engineers to perform essential digital engineering tasks on 3D models and assemblies—such as taking precise measurements, comparing design variants, inspecting internal and external structures, and visualizing key properties or changes. These capabilities allow teams to validate fit, function, and compliance with requirements, identify potential issues early, and communicate findings clearly—all before any physical prototype is built.
+At its core, DMU Analysis empowers engineers to perform essential digital engineering tasks on 3D models and assemblies - such as taking precise measurements, comparing design variants, inspecting internal and external structures, and visualizing key properties or changes. These capabilities allow teams to validate fit, function, and compliance with requirements, identify potential issues early, and communicate findings clearly—all before any physical prototype is built.
 
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based geometry data sharing possible across company boundaries.
 
@@ -93,7 +54,7 @@ This frequent, iterative exchange and review of engineering data between partner
 
 #### High-Level Scenario
 
-In a typical DMU Analysis workflow, one partner *Tier n+1* (e.g., a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner *Tier n* (e.g., an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
+In a typical DMU Analysis workflow, one partner *Tier n+1* (e.g. a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner *Tier n* (e.g. an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
 
 #### Practical Variants of DMU Analysis
 
@@ -119,12 +80,12 @@ The following simplified diagram illustrates the circular, iterative flow of eng
 
 ```mermaid
 flowchart TD
-	subgraph Partner_1 ["Partner 1"]
+	subgraph Partner_1 ["Tier n"]
 		A["Create/Update 3D Model"]
 		D["Review Feedback & Update Model if Needed"]
 	end
 
-	subgraph Partner_2 ["Partner 2"]
+	subgraph Partner_2 ["Tier n+1"]
 		B["Pull Geometry Data<br/>Review & Annotate (DMU, Bauraum, etc.)"]
 		C["Accept / Request Changes / Comment"]
 	end
@@ -138,24 +99,60 @@ flowchart TD
 
 **Description:**
 
-1. Partner 1 (Supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data via EDC into the Catena-X dataspace.
-2. Partner 2 (Customer/Partner) pulls the geometry data into their environment and performs review/analysis (e.g., DMU Analysis, Buildroom checks).
-3. Partner 2 annotates, comments, and either accepts the data or requests changes.
-4. Partner 1 reviews the feedback and, if needed, updates the model and republishes a new Digital Twin.
+1. Tier n (Supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data via EDC into the Catena-X dataspace.
+2. Tier n+1 (Customer/Partner) pulls the geometry data into their environment and performs review/analysis (e.g., DMU Analysis, Buildroom checks).
+3. Tier n+1 annotates, comments, and either accepts the data or requests changes.
+4. Tier n reviews the feedback and, if needed, updates the model and republishes a new Digital Twin.
 5. The cycle repeats until the geometry is accepted, ensuring efficient, sovereign, and standards-based cross-company collaboration.
 
-<!-- Specials within the scenario: 
+## System Overview: Data Flow Across Partners
 
-- Geometry Detail Exchange
-- DMU Light Review with Bounding Box and without Geometry load
--->
+The following diagram shows the main systems involved in the user journey, clearly differentiating between both partners. Each partner has its own data source, EDC, and business application. The Digital Twin Registry enables discovery and linkage across the ecosystem.
 
+```mermaid
+flowchart LR
+    subgraph Partner1["Tier n (Data Producer)"]
+        P1APP["Business App<br/>(Create/Publish/Review Feedback)"]
+		P1DS["Data Source<br/>(3D Data Persist/Update)"]
+        P1EDC["EDC"]
+    DTR["Digital Twin Registry"]
+        
+    end
 
-### User Journey System Flow
-<!-- 
-TODO: 
-Add an overview about the different systems involved and the different file packages and payloads created 
--->
+    subgraph Partner2["Tier n+1 (Data Consumer)"]
+        P2APP["Business App<br/>(Discover/Review/Annotate)"]
+		P2DS["Data Source<br/>(Local Copy/Updates)"]
+        P2EDC["EDC"]
+  
+    end
+
+    
+
+    %% Data Producer Flows
+    P1APP -- "Update 3D Data" --> P1DS
+	P1DS -- "Read 3D Data" --> P1APP
+    P1DS -- "Expose Data" --> P1EDC
+	P1EDC -- "Receive Data" --> P1DS
+    P1EDC -- "Offer/Exchange Data" --> P2EDC
+    P1EDC <-- "Register/Update/Discover Twin & Submodel" --> DTR
+
+    %% Data Consumer Flows
+	
+    P2EDC -- "Request Data" --> P1EDC
+    P2EDC -- "Provide Data" --> P2DS
+    
+    P2DS -- "Load Data" --> P2APP
+    P2APP -- "Review/Annotate" --> P2DS
+    
+
+    %% Discovery
+    P2APP -- "Discover Twin/Model" --> P2EDC
+```
+
+**Description:**
+- Each partner has its own Data Source (for persisting and updating 3D data), EDC (for secure data exchange), and Business Application (for creation, review, and annotation).
+- The Digital Twin Registry enables discovery and linkage of geometry data across partners.
+- Data flows from Partner 1's app to their data source, is registered in the DTR, and exchanged via EDC to Partner 2, where it is consumed and reviewed in their own environment.
 
 ## Geometry understanding
 
@@ -176,57 +173,6 @@ In short, SingleLevelSceneNode connects geometry within one digital twin, wherea
 | **Linking Mechanism**         | Via `childItems`: connects **own geometries (SceneNodes)** hierarchically. No external references.      | Via `childItems`: connects **different digital twins**, forming a product structure.                          |
 | **Data Content**              | geometry as data ressource, transformations, bounding volumes.                                               | Product metadata, identifiers, classifications, and references to other aspects (e.g., Part Type).            |
 | **Typical Use Case**          | Visualization, simulation, DMU analysis, or digital mock-up of a geometry model.                                            | Building a complete product structure across company boundaries.                                              |
-
-
-## System Overview: Data Flow Across Partners
-
-The following diagram shows the main systems involved in the user journey, clearly differentiating between both partners. Each partner has its own data source, EDC, and business application. The Digital Twin Registry enables discovery and linkage across the ecosystem.
-
-```mermaid
-flowchart TB
-    subgraph Partner1["Partner 1 (Data Producer)"]
-        P1APP["Business App<br/>(Create/Publish/Review Feedback)"]
-		P1DS["Data Source<br/>(3D Data Persist/Update)"]
-        P1EDC["EDC"]
-        
-    end
-
-    subgraph Partner2["Partner 2 (Data Consumer)"]
-        P2APP["Business App<br/>(Discover/Review/Annotate)"]
-		P2DS["Data Source<br/>(Local Copy/Updates)"]
-        P2EDC["EDC"]
-		DTR["Digital Twin Registry"]
-        
-    end
-
-    
-
-    %% Data Producer Flows
-    P1APP -- "Update 3D Data" --> P1DS
-	P1DS -- "Read 3D Data" --> P1APP
-    P1DS -- "Expose Data" --> P1EDC
-	P1EDC -- "Receive Data" --> P1DS
-    P1EDC -- "Offer/Exchange Data" --> P2EDC
-
-    %% Data Consumer Flows
-	P2EDC <-- "Register/Update Twin & Submodel" --> DTR
-    P2EDC -- "Request Data" --> P1EDC
-    P2EDC -- "Provide Data" --> P2DS
-    P2DS -- "Expose Data" --> P2EDC
-    P2DS -- "Load Data" --> P2APP
-    P2APP -- "Review/Annotate" --> P2DS
-    P2APP <-- "Update Twin & Submodel" --> DTR
-
-    %% Discovery
-    P2APP -- "Discover Twin/Model" --> P2EDC
-```
-
-**Description:**
-- Each partner has its own Data Source (for persisting and updating 3D data), EDC (for secure data exchange), and Business Application (for creation, review, and annotation).
-- The Digital Twin Registry enables discovery and linkage of geometry data across partners.
-- Data flows from Partner 1's app to their data source, is registered in the DTR, and exchanged via EDC to Partner 2, where it is consumed and reviewed in their own environment.
-
-
 
 ## Example Files and Understanding
 
@@ -256,7 +202,7 @@ flowchart LR
         
         subgraph TierN1 ["Tier n+1"]
             direction LR
-            SUP1["2. Access & Analyze<br/> geometry<br/>(Bauraum Analysis)"] 
+            SUP1["2. Access & Analyze<br/> geometry<br/>"] 
             SUP1 --> SUP2["3. Create Digital Twin <br/>• SLSN & Binary Exchange<br/>• Meet Tier n constraints"]
             SUP2 --> SUP3["5. Incorporate<br/>Feedback &<br/>Design Iteration"]
             SUP3 --> SUP4["6. Publish Updated<br/>Digital Twin"]
@@ -296,7 +242,7 @@ Here, the workflow starts on the left and progressed to the right as a function 
 
 6. **Publish Updated Digital Twin**: Once again, when ready, *Tier n+1* provides access to their updated Digital Twin of the drive train.
 
-7. **Final Approval in Aspect Model**: Once *Tier n* is satisfied, the Aspect Model for the combined geometry can be approved. This is the last step in this example.
+7. **Final Approval in Aspect Model**: Once *Tier n* is satisfied, the Digital Twin for the combined geometry can be approved. This is the last step in this example.
 
 <br>
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
@@ -312,14 +258,17 @@ In theory, both the *Tier n* and *Tier n+1* can view each others geometry data t
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
 <table>
   <tr>
+    <th><strong></strong></th>
     <th><strong>Tier n</strong></th>
     <th><strong>Tier n+1</strong></th>
   </tr>
   <tr>
+    <td><strong>STEP Files</strong></td>
     <td><a href="./resources/basic-example/STEP/asm_frame.step">asm_frame.step</a></td>
     <td><a href="./resources/basic-example/STEP/asm_drive.step">asm_drive.step</a></td>
   </tr>
   <tr>
+  <td><strong>Created JSON Payloads</strong></td>
     <td><a href="./resources/basic-example/json/SLSN_frame_payload.json">SLSN_frame_payload.json</a></td>
     <td><a href="./resources/basic-example/json/SLSN_drive_payload.json">SLSN_drive_payload.json</a></td>
   </tr>
