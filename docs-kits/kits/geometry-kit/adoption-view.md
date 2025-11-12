@@ -50,86 +50,73 @@ At its core, DMU Analysis empowers engineers to perform essential digital engine
 
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based geometry data sharing possible across company boundaries.
 
-
-
-```mermaid
+```mermaid 
 flowchart TB
- subgraph OEM["Tier n+1"]
-        o_req(["Provide DMU Request, Master Data, and RCS"])
-        o_define(["Define LOD/LoA, Representation Type, Variant"])
-        o_contract(["Negotiate EDC/IDS Contract & Usage Policy"])
-        o_pkg[/"Package: Geometry data + manifest (master data, ReqIF, RCS, LOD/LoA)"/]
+ subgraph OEM["Tier n (OEM)"]
+        o_start(["Requirements established and aligned"])
+        o_req(["Request new geometry"])
+        o_provide(["Provide Geometry Digital Twin"])
+        o_define(["Define Reference Coordinate System, Level of Detail and Level of Abstraction"])
+        o_package[/"Digital Twin 1"/]
         o_assemble(["DMU Assembly: load master data, place geometry"])
         o_analysis(["DMU Checks: clash, clearance, serviceability"])
-        o_feedback(["Provide structured feedback to suppliers"])
         o_gate{"Approve?"}
-        o_release(["Approved DMU / Release Geometry"])
+        o_release(["Release Geometry"])
         o_approval(("Approval"))
+        o_feedback(["Structured Feedback"])
   end
- subgraph S1["Tier n+1"]
-        s1_confirm(["Confirm Contract: IDs, RCS, Units"])
-        s1_create(["Create/Adjust 3D Representation"])
-        s1_check(["Geometry Quality Checklist"])
-        s1_review(["Internal DMU Validation"])
-        s1_pack[/"Package: Geometry data + master data + quality report"/]
-        s1_adjust(["Adjust Geometry per feedback"])
-        s1_review2(["Internal Review"])
-        s1_pack2[/"Repackage: updated geometry + master data"/]
-        s1_done(("Package Approved"))
+ subgraph SUP["Tier n+1 (Supplier)"]
+        s_create(["Create 3D Representation"])
+        s_provide(["Provide Geometry Digital Twin"])
+        s_check(["Check Geometry Quality"])
+        s_pack[/"Digital Twin 2"/]
+        s_adjust(["Adjust 3D Representation/Digital Twin"])
+        s_review(["Internal Review"])
+        s_pack2[/"Repackaged Digital Twin"/]
   end
- subgraph DS["Catena‑X Dataspace (EDC/IDS)"]
-        ds_exchange(["EDC Transfer"])
-        ds_notify(["Notification"])
-  end
+    o_start --> o_req
     o_req --> o_define
-    o_define --> o_contract
-    o_contract --> o_pkg
-    o_pkg --> ds_exchange
-    ds_exchange --> o_assemble
+    o_define --> o_provide
+    o_provide --> o_package
+    s_create --> s_check
+    s_check --> s_provide
+    s_provide --> s_pack
+    s_pack --> o_assemble
     o_assemble --> o_analysis
     o_analysis --> o_gate
     o_gate -- OK --> o_release
     o_release --> o_approval
-    o_approval --> ds_notify & ds_notify & ds_notify
     o_gate -- NOK --> o_feedback
-    ds_notify --> s1_confirm & s1_adjust & s1_done & s1_adjust
-    s1_confirm --> s1_create
-    s1_create --> s1_check
-    s1_check --> s1_review
-    s1_review --> s1_pack
-    s1_pack --> ds_exchange
-    o_feedback --> ds_notify & ds_notify
-    s1_adjust --> s1_review2
-    s1_review2 --> s1_pack2
-    s1_pack2 --> ds_exchange
+    o_feedback --> s_adjust
+    s_adjust --> s_review
+    s_review --> s_pack2
+    s_pack2 --> o_assemble
+    o_package --> s_create
+     o_start:::terminal
      o_req:::activity
+     o_provide:::activity
      o_define:::activity
-     o_contract:::activity
-     o_pkg:::artifact
+     o_package:::artifact
      o_assemble:::activity
      o_analysis:::activity
-     o_feedback:::activity
      o_gate:::gateway
      o_release:::activity
      o_approval:::terminal
-     s1_confirm:::activity
-     s1_create:::activity
-     s1_check:::checklist
-     s1_review:::activity
-     s1_pack:::artifact
-     s1_adjust:::activity
-     s1_review2:::activity
-     s1_pack2:::artifact
-     s1_done:::terminal
-     ds_exchange:::exchange
-     ds_notify:::exchange
-    classDef activity fill:#E3F2FD,stroke:#1E88E5,stroke-width:2, color: #000
-    classDef gateway fill:#E8F5E9,stroke:#43A047,stroke-width:2, color: #000
-    classDef checklist fill:#F3E5F5,stroke:#8E24AA,stroke-dasharray:2 2, color: #000
-    classDef exchange fill:#FCE4EC,stroke:#D81B60,stroke-width:2, color: #000
-    classDef terminal fill:#CFD8DC,stroke:#455A64,stroke-width:2, color: #000
-    classDef artifact fill:#FFF3E0,stroke:#FB8C00,stroke-width:2,stroke-dasharray:3 3, color: #000
-```
+     o_feedback:::activity
+     s_create:::activity
+     s_check:::activity
+     s_pack:::artifact
+     s_adjust:::activity
+     s_review:::activity
+     s_pack2:::artifact
+     s_provide:::activity
+    classDef activity fill:#E3F2FD,stroke:#1E88E5,stroke-width:2, color:#000
+    classDef gateway fill:#E8F5E9,stroke:#43A047,stroke-width:2, color:#000
+    classDef checklist fill:#F3E5F5,stroke:#8E24AA,stroke-dasharray:2 2, color:#000
+    classDef exchange fill:#FCE4EC, stroke:#D81B60, stroke-width:2, color:#000
+    classDef terminal fill:#CFD8DC, stroke:#455A64, stroke-width:2, color:#000
+    classDef artifact fill:#FFF3E0, stroke:#FB8C00, stroke-width:2, stroke-dasharray:3 3, color:#000
+````
 
 #### High-Level Scenario
 
@@ -159,12 +146,12 @@ The following simplified diagram illustrates the circular, iterative flow of eng
 
 ```mermaid
 flowchart TD
-	subgraph Partner_1 ["Tier n"]
+	subgraph Partner_1 ["Tier n+1"]
 		A["Create/Update 3D Model"]
 		D["Review Feedback & Update Model if Needed"]
 	end
 
-	subgraph Partner_2 ["Tier n+1"]
+	subgraph Partner_2 ["Tier n"]
 		B["Pull Geometry Data<br/>Review & Annotate (DMU, Bauraum, etc.)"]
 		C["Accept / Request Changes / Comment"]
 	end
@@ -190,7 +177,7 @@ The following diagram shows the main systems involved in the user journey, clear
 
 ```mermaid
 flowchart LR
-    subgraph Partner1["Tier n (Data Producer)"]
+    subgraph Partner1["Data Producer"]
         P1APP["Business App<br/>(Create/Publish/Review Feedback)"]
 		P1DS["Data Source<br/>(3D Data Persist/Update)"]
         P1EDC["EDC"]
@@ -198,7 +185,7 @@ flowchart LR
         
     end
 
-    subgraph Partner2["Tier n+1 (Data Consumer)"]
+    subgraph Partner2["Data Consumer"]
         P2APP["Business App<br/>(Discover/Review/Annotate)"]
 		P2DS["Data Source<br/>(Local Copy/Updates)"]
         P2EDC["EDC"]

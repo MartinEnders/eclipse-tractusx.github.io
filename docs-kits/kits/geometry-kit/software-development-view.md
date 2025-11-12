@@ -11,6 +11,34 @@ sidebar_position: 4
 
 The flowchart illustrates the interactions between the main components in the geometry data exchange system:
 
+```mermaid
+flowchart LR
+
+subgraph Local["Local Data Provider Components"]
+    geoSysC[Geometry System]
+    dataSrcC[Data Source]
+    geoSysC <--> dataSrcC
+end
+
+subgraph CatenaX["Catena-X Network Components"]
+    dtrC[Digital Twin Registry]
+    submodelC[Submodel Service]
+    edcC[Eclipse Dataspace Connector]
+end
+
+%% Local system interactions
+geoSysC -- Register Digital Twins and Submodel Descriptors --> dtrC
+dataSrcC -- Provide SingleLevelSceneNode Submodels --> submodelC
+dataSrcC -- Expose Geometry Data --> edcC
+geoSysC -- Discover Partner Geometry --> edcC
+
+%% Catena-X network interactions
+dtrC -- Provide Digital Twins --> edcC
+submodelC -- Provide Submodels --> edcC
+edcC -- Secure Data Exchange --> edcC
+
+```
+
 #### Components
 
 The following components are necessary for the geometry exchange:
@@ -44,33 +72,7 @@ The system architecture demonstrates how components interact to facilitate geome
   - Provides SingleLevelSceneNode and Binary Exchange submodels to the Eclipse Dataspace Connector
   - Serves geometry metadata and structure information
 
-```mermaid
-flowchart LR
 
-subgraph Local["Local Data Provider Components"]
-    geoSysC[Geometry System]
-    dataSrcC[Data Source]
-    geoSysC <--> dataSrcC
-end
-
-subgraph CatenaX["Catena-X Network Components"]
-    dtrC[Digital Twin Registry]
-    submodelC[Submodel Service]
-    edcC[Eclipse Dataspace Connector]
-end
-
-%% Local system interactions
-geoSysC -- Register Digital Twins and Submodel Descriptors --> dtrC
-dataSrcC -- Provide SingleLevelSceneNode Submodels --> submodelC
-dataSrcC -- Expose Geometry Data --> edcC
-geoSysC -- Discover Partner Geometry --> edcC
-
-%% Catena-X network interactions
-dtrC -- Provide Digital Twins --> edcC
-submodelC -- Provide Submodels --> edcC
-edcC -- Secure Data Exchange --> edcC
-
-```
 
 ### Geometry Data Exchange Sequence
 
@@ -135,7 +137,7 @@ sequenceDiagram
     supDtr->>supEDC: SingleLevelSceneNode Submodel & Metadata
     supEDC-->>supDataSrc: Request Binary Files
     supDataSrc->>supEDC: Geometry Files (STEP, JT, etc.) via Binary Exchange
-    supEDC->>oemEDC: Complete Geometry Data Package
+    supEDC->>oemEDC: Complete Geometry Data Exchange
     oemEDC->>oemDataSrc: Store Received Geometry Data
     oemEDC->>oemDtr: Register Local Digital Twin Copy
     oemDataSrc->>oemGeoSys: Load Geometry for DMU Analysis
@@ -147,7 +149,7 @@ sequenceDiagram
     Note over supGeoSys, oemGeoSys: Iterative Process: Tier n+1 updates geometry based on feedback, republishes updated Digital Twins, and Tier n reviews updates
 ```
 
-## Geometry Aspect Model
+## Single Level Scene Node Aspect Model
 
 The following section gives an overview of the SingleLevelScenenNode aspect model. This aspect model is a submodel that contains the geometry information and the linked childItems which are also scene nodes.
 
@@ -237,6 +239,8 @@ The following section gives an overview of the SingleLevelScenenNode aspect mode
 }
 
 ```
+
+Also have a look at the example in Adoption View. 
 
 ## Data Retrieval Flow
 
