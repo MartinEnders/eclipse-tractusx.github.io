@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ### Added
 
-- Initial version of the Kit including adoption, operation and development view
+- Initial version of the Kit including adoption and development view
 
 ### Changed
 
