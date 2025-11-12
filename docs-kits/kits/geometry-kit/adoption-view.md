@@ -51,7 +51,7 @@ At its core, DMU Analysis empowers engineers to perform essential digital engine
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based geometry data sharing possible across company boundaries.
 
 ```mermaid 
-flowchart TB
+flowchart 
  subgraph OEM["Tier n (OEM)"]
         o_start(["Requirements established and aligned"])
         o_req(["Request new geometry"])
@@ -66,11 +66,11 @@ flowchart TB
         o_feedback(["Structured Feedback"])
   end
  subgraph SUP["Tier n+1 (Supplier)"]
-        s_create(["Create 3D Representation"])
+        s_create(["Create Geometry Representation"])
         s_provide(["Provide Geometry Digital Twin"])
         s_check(["Check Geometry Quality"])
         s_pack[/"Digital Twin 2"/]
-        s_adjust(["Adjust 3D Representation/Digital Twin"])
+        s_adjust(["Adjust Geometry Representation/Digital Twin"])
         s_review(["Internal Review"])
         s_pack2[/"Repackaged Digital Twin"/]
   end
@@ -192,8 +192,6 @@ flowchart LR
   
     end
 
-    
-
     %% Data Producer Flows
     P1APP -- "Update 3D Data" --> P1DS
 	P1DS -- "Read 3D Data" --> P1APP
@@ -209,7 +207,6 @@ flowchart LR
     
     P2DS -- "Load Data" --> P2APP
     P2APP -- "Review/Annotate" --> P2DS
-    
 
     %% Discovery
     P2APP -- "Discover Twin/Model" --> P2EDC
@@ -347,7 +344,6 @@ The table above summarizes who owns what data during evolution of the workflow.
 ## Associated CX-Standards
 
 ### Geometry Standard
-https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-release-bundle/standards/CX-0156-Geometry/CX-0156-Geometry.md
 
 urn:samm:io.catenax.single_level_scene_node:1.0.0#
 
@@ -357,22 +353,28 @@ For full details, see the Catena-X [Geometry Standard (CX-0156)](https://github.
 
 
 ### Masterdata
-[https://github.com/catenax-eV/product-standardization-prod/blob/R25.12-CX-XXXX-Geometry/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md ](https://github.com/catenax-eV/product-standardization-prod/blob/main/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md)
+
+urn:samm:io.catenax.digital_engineering_master_data:1.0.0#
 
 The Masterdata standard (CX-0154) is essential as it provides the structured, interoperable foundation for exchanging all relevant product master information—including references and metadata for 3D geometry—across the value chain. It ensures that 3D data is always contextualized with accurate, up-to-date master information, enabling seamless discovery, retrieval, and integration of 3D models in Catena-X. Our 3D standard builds on this by specifying how geometry and related data are referenced, described, and linked within the masterdata framework, ensuring consistency, traceability, and interoperability for all 3D-centric use cases. The 3D/geometry standard can be used in combination with master data, but it is not mandatory—3D data may also be exchanged independently where appropriate.
+
+For full details, see the Catena-X [Masterdata Standard CX-0154](https://github.com/catenax-eV/product-standardization-prod/blob/main/standards/CX-0154-MasterDataManagement/CX-0154-MasterDataManagement.md).
 
 
 ### Digital Twin Standard
 The Digital Twin standard (CX-0002) is fundamental for Catena-X as it defines how assets are digitally represented, uniquely identified, and made discoverable across the network. It provides the architecture and APIs for registering, linking, and accessing digital twins and their aspects (such as 3D geometry, simulation, or master data) in a standardized, interoperable way. This enables seamless integration, traceability, and lifecycle management of 3D information and related data, forming the backbone for all data-driven collaboration and automation scenarios in the ecosystem. In the future, the 3D standard will enable Catena-X participants to communicate 3D data and information directly via digital twins, making 3D data exchange an integral part of the Catena-X dataspace.
 
-https://catenax-ev.github.io/docs/next/standards/CX-0002-DigitalTwinsInCatenaX
+For full details, see the Catena-X [Digital Twin CX-0002](https://catenax-ev.github.io/docs/next/standards/CX-0002-DigitalTwinsInCatenaX)
 
 
 
 ### BinaryExchange
+
+urn:samm:io.catenax.binary_exchange:1.0.0#
+
 The BinaryExchange aspect model is essential for standardized, secure, and interoperable exchange of binary files—such as 3D models—across the Catena-X dataspace. It provides a common structure for describing, referencing, and accessing binary data, including metadata, content type, and access mechanisms via the Dataspace Protocol (DSP).
 
-https://github.com/eclipse-tractusx/sldt-semantic-models/blob/main/io.catenax.binary_exchange/1.0.0/BinaryExchange.ttl
+For full details, see the Catena-X [Binary Exchange Aspect Model](https://github.com/eclipse-tractusx/sldt-semantic-models/blob/main/io.catenax.binary_exchange/1.0.0/BinaryExchange.ttl)
 
 
 #### Media Type Types for Data Formats
