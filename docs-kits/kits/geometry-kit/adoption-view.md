@@ -50,7 +50,86 @@ At its core, DMU Analysis empowers engineers to perform essential digital engine
 
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based geometry data sharing possible across company boundaries.
 
-![Use Case Flow Chart](./resources/usecase-flowchart.png)
+
+
+```mermaid
+flowchart TB
+ subgraph OEM["Tier n+1"]
+        o_req(["Provide DMU Request, Master Data, and RCS"])
+        o_define(["Define LOD/LoA, Representation Type, Variant"])
+        o_contract(["Negotiate EDC/IDS Contract & Usage Policy"])
+        o_pkg[/"Package: Geometry data + manifest (master data, ReqIF, RCS, LOD/LoA)"/]
+        o_assemble(["DMU Assembly: load master data, place geometry"])
+        o_analysis(["DMU Checks: clash, clearance, serviceability"])
+        o_feedback(["Provide structured feedback to suppliers"])
+        o_gate{"Approve?"}
+        o_release(["Approved DMU / Release Geometry"])
+        o_approval(("Approval"))
+  end
+ subgraph S1["Tier n+1"]
+        s1_confirm(["Confirm Contract: IDs, RCS, Units"])
+        s1_create(["Create/Adjust 3D Representation"])
+        s1_check(["Geometry Quality Checklist"])
+        s1_review(["Internal DMU Validation"])
+        s1_pack[/"Package: Geometry data + master data + quality report"/]
+        s1_adjust(["Adjust Geometry per feedback"])
+        s1_review2(["Internal Review"])
+        s1_pack2[/"Repackage: updated geometry + master data"/]
+        s1_done(("Package Approved"))
+  end
+ subgraph DS["Catena‑X Dataspace (EDC/IDS)"]
+        ds_exchange(["EDC Transfer"])
+        ds_notify(["Notification"])
+  end
+    o_req --> o_define
+    o_define --> o_contract
+    o_contract --> o_pkg
+    o_pkg --> ds_exchange
+    ds_exchange --> o_assemble
+    o_assemble --> o_analysis
+    o_analysis --> o_gate
+    o_gate -- OK --> o_release
+    o_release --> o_approval
+    o_approval --> ds_notify & ds_notify & ds_notify
+    o_gate -- NOK --> o_feedback
+    ds_notify --> s1_confirm & s1_adjust & s1_done & s1_adjust
+    s1_confirm --> s1_create
+    s1_create --> s1_check
+    s1_check --> s1_review
+    s1_review --> s1_pack
+    s1_pack --> ds_exchange
+    o_feedback --> ds_notify & ds_notify
+    s1_adjust --> s1_review2
+    s1_review2 --> s1_pack2
+    s1_pack2 --> ds_exchange
+     o_req:::activity
+     o_define:::activity
+     o_contract:::activity
+     o_pkg:::artifact
+     o_assemble:::activity
+     o_analysis:::activity
+     o_feedback:::activity
+     o_gate:::gateway
+     o_release:::activity
+     o_approval:::terminal
+     s1_confirm:::activity
+     s1_create:::activity
+     s1_check:::checklist
+     s1_review:::activity
+     s1_pack:::artifact
+     s1_adjust:::activity
+     s1_review2:::activity
+     s1_pack2:::artifact
+     s1_done:::terminal
+     ds_exchange:::exchange
+     ds_notify:::exchange
+    classDef activity fill:#E3F2FD,stroke:#1E88E5,stroke-width:2, color: #000
+    classDef gateway fill:#E8F5E9,stroke:#43A047,stroke-width:2, color: #000
+    classDef checklist fill:#F3E5F5,stroke:#8E24AA,stroke-dasharray:2 2, color: #000
+    classDef exchange fill:#FCE4EC,stroke:#D81B60,stroke-width:2, color: #000
+    classDef terminal fill:#CFD8DC,stroke:#455A64,stroke-width:2, color: #000
+    classDef artifact fill:#FFF3E0,stroke:#FB8C00,stroke-width:2,stroke-dasharray:3 3, color: #000
+```
 
 #### High-Level Scenario
 
