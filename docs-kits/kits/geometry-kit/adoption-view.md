@@ -27,7 +27,7 @@ The Geometry KIT enables companies to build secure, cross-company engineering co
 
 ### Todays Challenge
 
-Companies face significant challenges when exchanging engineering-grade geometry data across organizational boundaries. Critical 3D CAD data is often locked away in isolated systems, accessible only to a few experts, as well as 2D data. Sharing geometry with partners typically requires manual exports, data conversions, or the use of static screenshots and lightweight viewers—processes that are time-consuming, error-prone, and result in loss of detail and context. These workarounds create data silos, slow down collaboration, and increase the risk of inconsistencies and downstream errors.
+Companies face significant challenges when exchanging engineering-grade geometry data across organizational boundaries. Critical 3D and 2D CAD data is often locked away in isolated systems, accessible only to a few experts. Sharing geometry with partners typically requires manual exports, data conversions, or the use of static screenshots and lightweight viewer—processes that are time-consuming, error-prone, and result in loss of detail and context. These workarounds create data silos, slow down collaboration, and increase the risk of inconsistencies and downstream errors.
 
 Security and intellectual property protection add further complexity: companies must ensure that sensitive design data is only accessible to authorized partners, while still enabling efficient collaboration. The lack of standardized, automated processes for geometry exchange leads to duplicated efforts, high integration costs, and limited ability to leverage geometry data throughout the product lifecycle. As a result, engineering teams struggle to keep data up-to-date, respond quickly to changes, and fully realize the value of their geometry assets in cross-company projects.
 
@@ -46,7 +46,7 @@ By implementing and aligning their offerings with Catena-X, solution providers c
 
 Digital Mock-Up (DMU) Analysis is a central use case in the design phase of physical products, where Tier n and Tier n+1 must collaborate closely to develop and adjust their products in line with requirements from both sides. During this phase, engineers regularly review, comment, and align on the current development status, communicating necessary changes and feedback iteratively. DMU Analysis enables teams to ensure the evolving product meets all requirements before physical prototypes are built.
 
-At its core, DMU Analysis empowers engineers to perform essential digital engineering tasks on 3D models and assemblies - such as taking precise measurements, comparing design variants, inspecting internal and external structures, and visualizing key properties or changes. These capabilities allow teams to validate fit, function, and compliance with requirements, identify potential issues early, and communicate findings clearly—all before any physical prototype is built.
+At its core, DMU Analysis empowers engineers to perform essential digital engineering tasks on 3D models and assemblies - such as taking precise measurements, checking clearance, detecting clashes, assessing serviceability, comparing design variants, inspecting internal and external structures, and visualizing key properties or changes. These capabilities allow teams to validate fit, function, and compliance with requirements, identify potential issues early, and communicate findings clearly—all before any physical prototype is built.
 
 This frequent, iterative exchange and review of engineering data between partners is the core collaboration scenario that the Geometry KIT enables, making secure, automated, and standards-based geometry data sharing possible across company boundaries.
 
@@ -120,7 +120,7 @@ flowchart
 
 #### High-Level Scenario
 
-In a typical DMU Analysis workflow, one partner *Tier n+1* (e.g. a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner *Tier n* (e.g. an OEM) discovers, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and feedback annotation. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. Also see User Journey section for more details. 
+In a typical DMU Analysis workflow, one partner *Tier n+1* (e.g. a supplier) creates or updates a 3D model and publishes it as a Digital Twin with geometry data into the Catena-X dataspace. Another partner *Tier n* (e.g. an OEM) finds, pulls, and reviews this geometry data in their own environment, performing analyses such as clash detection, assembly verification, and redlining and annotation feedback. The process is iterative: feedback is provided, updates are made, and the cycle repeats until the design is accepted—all while maintaining data sovereignty and security. (See User Journey section for more details.) 
 
 #### Practical Variants of DMU Analysis
 
@@ -138,7 +138,7 @@ Not all collaboration requires the full geometric detail of a part or assembly. 
 
 Because partners often use different CAD systems and engineering tools, DMU Analysis scenarios frequently require the exchange of geometry in multiple formats. Common standards include JT and STEP, but native formats from systems like CATIA, Creo, or NX may also be used. The Geometry KIT supports this diversity by enabling the secure, standards-based transfer of various file types, ensuring interoperability across company and system boundaries.
 
-These variants demonstrate the flexibility of DMU Analysis within Catena-X: from lightweight, early-phase checks to detailed, high-precision collaboration, and across a range of data formats. By supporting these different forms, the Geometry KIT ensures that engineers and implementors can tailor their data exchange to the needs of each project phase—balancing efficiency, security, and technical requirements.
+These variants demonstrate the flexibility of DMU Analysis within Catena-X: from lightweight, early-phase checks to detailed, high-precision collaboration, and across a range of data formats. By supporting these different formats, the Geometry KIT ensures that engineers and implementors can tailor their data exchange to the needs of each project phase—balancing efficiency, security, and technical requirements.
 
 ## User Journey
 
@@ -225,7 +225,7 @@ The SingleLevelSceneNode defines the geometric and spatial structure within a si
 
 The BOM structure, on the other hand, describes the logical and semantic product structure that spans multiple digital twins. Instead of focusing on geometry, it defines how different components — potentially originating from different business partners — are related in a product hierarchy. Each child item in the BOM points to the Catena-X ID of another digital twin, allowing an *Tier n* twin, for example, to reference parts or sub-assemblies provided by suppliers *Tier n+1*. Through this model, the overall product composition across the supply chain can be represented consistently. These connected digital twins can contain geometry data as well but don't have to.
 
-In short, SingleLevelSceneNode connects geometry within one digital twin, whereas SingleLevelBOM connects digital twins with each other. The SingleLevelSceneNode model builds the internal spatial view of a twin, while the BOM model builds the external structural view across organizational boundaries — together forming a complete digital representation of both the product’s geometry and its multi-partner assembly hierarchy. The overview can be found in the following table.
+In short, SingleLevelSceneNode connects geometry within one digital twin, whereas SingleLevelBOM connects multiple digital twins with each other. The SingleLevelSceneNode model builds the internal spatial view of a twin, while the BOM model builds the external structural view across organizational boundaries — combined they complete a digital representation of both the product’s geometry and its multi-partner assembly hierarchy. The overview can be found in the following table.
 
 | Feature                       | **SingleLevelSceneNode**                                                                                | **SingleLevelBOM**                                                                                            |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -241,7 +241,7 @@ In short, SingleLevelSceneNode connects geometry within one digital twin, wherea
 
 ### Basic Bike Example with 2 Participants
 
-The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the *Tier n* and *Tier n+1*. The following example provides a guide for who owns what data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
+The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the *Tier n* and *Tier n+1*. The following example provides a guide for who owns which data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm_frame.step and asm_drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
 
 <div style="display: flex;  justify-content: center; gap: 16px; align-items: flex-start;">
   <img src="./resources/basic-example/img/bike-frame.png" alt="Bike Frame" width="300"/>
@@ -249,7 +249,7 @@ The simplest example of geometry data being shared in the Catena-X ecosystem inv
 </div>
 <br>
 
-In this example, the *Tier n* owns the bike, builds the frame, and assemble the bike from components provided by various suppliers. Here, a single suppler is considered, *Tier n+1*, who provides the bike drive train. The diagram below depicts how the geometry data workflow between *Tier n* and *Tier n+1* could look, but it is stressed this is only an example, and data sharing workflows will vary in design and complexity.
+In this example, the *Tier n* owns the bike, builds the frame, and assembles the bike from components provided by various suppliers. Here, a single suppler is considered, *Tier n+1*, who provides the bike drive train. The diagram below depicts how the geometry data workflow between *Tier n* and *Tier n+1* could look, but it should be stressed again that this is only an example, and data sharing workflows will vary in design and complexity.
 
 ```mermaid
 flowchart LR
@@ -293,9 +293,9 @@ flowchart LR
 
 Here, the workflow starts on the left and progressed to the right as a function of time.
 
-1. **Create & Publish Digital Twin**: Initially, *Tier n* creates and publishes access to the Digital Twin (DT), which includes the Digital Engineering Master Data (DMD) and Single Level Scene Node (SLSN) for the bike by posting the asset on the Digital Twin Registry. The STEP file is included in this and is linked to Single Level Scene Node via the Binary Data Exchange.
+1. **Create & Publish Digital Twin**: Initially, *Tier n* creates and publishes access to the Digital Twin (DT), which includes the Digital Engineering Master Data (DMD) and the Single Level Scene Node (SLSN) for the bike by posting the asset on the Digital Twin Registry. The STEP file is included in this and is linked to the Single Level Scene Node via the Binary Data Exchange.
 
-2. **Access & Analyze Geometry**: *Tier n+1* can then access and assess the Digital Twin and associated assets via the Digital Twin Registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. *Tier n+1* analyses the geometry data provided by *Tier n*, in this instance the bike frame, but this could also be a Bauraum or equivalent.
+2. **Access & Analyze Geometry**: *Tier n+1* can then access and assess the Digital Twin and associated assets via the Digital Twin Registry. These processes usually occur via each counterpart's EDCs, but these are omitted for simplicity. *Tier n+1* analyses the geometry data provided by *Tier n*, in this instance the bike frame, but this could also be a bounding volume or equivalent.
 
 3. **Create Digital Twin**: *Tier n+1* creates their own Digital Twin for the drive train, including the STEP file, linked to Single Level Scene Node via the Binary Data Exchange, and iterates on it to meet *Tier n* constraints and specifications.
 
@@ -339,7 +339,7 @@ In theory, both the *Tier n* and *Tier n+1* can view each others geometry data t
 </div>
 <br>
 
-The table above summarizes who owns what data during evolution of the workflow.
+The table above summarizes who owns which data throughout the progression of the workflow.
 
 ## Associated CX-Standards
 
@@ -383,7 +383,7 @@ The Binary Exchange aspect model defines a dependency on Media Type types to des
 
 **What are Media Type types?**
 
-Media Type types are strings like `application/step` or `model/jt` that identify the file type and its intended usage. They are widely used in web protocols, APIs, and file exchanges to signal how a file should be handled. The first part of a Media Type type indicates the general category (e.g., `application`, `model`, `image`), while the second part specifies the exact format (e.g., `step`, `jt`, `iges`).
+Media Type types are strings like `application/xml` or `model/jt` that identify the file type and its intended usage. They are widely used in web protocols, APIs, and file exchanges to signal how a file should be handled. The first part of a Media Type type indicates the general category (e.g., `application`, `model`, `image`), while the second part specifies the exact format (e.g., `step`, `jt`, `iges`).
 
 **CAD Formats Defined by IANA**
 
