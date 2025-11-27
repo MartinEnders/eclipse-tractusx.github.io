@@ -245,23 +245,126 @@ flowchart LR
 
 ## Geometry understanding
 
-The following section describes the difference in structure of the SingleLevelSceneNode and the BOM structure. It also makes clear how both work together. The SingleLevelSceneNode and SingleLevelBOM aspect models in Catena-X serve two complementary but clearly distinct purposes.
+## Geometry Understanding
 
-The SingleLevelSceneNode defines the geometric and spatial structure within a single digital twin. It organizes geometry data by describing how individual objects or assemblies are positioned, transformed, and related to one another inside that twin. Each SingleLevelSceneNode represents a geometric object or group of objects, identified by its own Catena-X ID. Through its child items, a scene node can reference other scene nodes, but only those that belong to the same digital twin (and therefore are provided by the same participant). These hierarchical relationships are purely spatial — they define how geometry is composed and arranged, not how different products or business entities are connected or how assebly throughout multiple participants work. The model also contains information such as transformation matrices, bounding volumes, and metadata that describe the geometry’s placement and extent. In essence, the SingleLevelSceneNode provides the internal geometry structure that can be used for visualization, simulation, or digital mock-up purposes.
+### Three Distinct Structural Hierarchies
 
-The BOM structure, on the other hand, describes the logical and semantic product structure that spans multiple digital twins. Instead of focusing on geometry, it defines how different components — potentially originating from different business partners — are related in a product hierarchy. Each child item in the BOM points to the Catena-X ID of another digital twin, allowing an *Tier n* twin, for example, to reference parts or sub-assemblies provided by suppliers *Tier n+1*. Through this model, the overall product composition across the supply chain can be represented consistently. These connected digital twins can contain geometry data as well but don't have to.
+When working with geometry data in Catena-X, it is critical to understand that there are three distinct hierarchical structures at play. Each serves a specific purpose, operates at a different level of abstraction, and manages data boundaries differently.
 
-In short, SingleLevelSceneNode connects geometry within one digital twin, whereas SingleLevelBOM connects multiple digital twins with each other. The SingleLevelSceneNode model builds the internal spatial view of a twin, while the BOM model builds the external structural view across organizational boundaries — combined they complete a digital representation of both the product’s geometry and its multi-partner assembly hierarchy. The overview can be found in the following table.
 
-| Feature                  | **SingleLevelSceneNode**                                                                           | **SingleLevelBOM**                                                                                            |
-|--------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Purpose / Function**   | Represents the **spatial and geometric structure** within a single digital twin.                   | Describes the **logical and functional product structure** (bill of materials) across multiple digital twins. |
-| **Scope / Level**        | Applies **only within one digital twin** — i.e., within its own data instance.                     | Connects **multiple digital twins** — components or assemblies across business partners.                      |
-| **Type of Relationship** | **Geometric / spatial** relationships between parts (e.g., transform, bounding volume).            | **Structural / semantic** relationships (e.g., which component belongs to which assembly).                    |
-| **Main Entity**          | `modelItems` — links to a geometry data object or group of objects.                                | `childItem` — describes the relationship between parent and child twins.                                      |
-| **Linking Mechanism**    | Via `childItems`: connects **own geometries (SceneNodes)** hierarchically. No external references. | Via `childItems`: connects **different digital twins**, forming a product structure.                          |
-| **Data Content**         | geometry as data ressource, transformations, bounding volumes.                                     | Product metadata, identifiers, classifications, and references to other aspects (e.g., Part Type).            |
-| **Typical Use Case**     | Visualization, simulation, DMU analysis, or digital mock-up of a geometry model.                   | Building a complete product structure across company boundaries.                                              |
+
+These are:
+
+1. **BOM Structure** (Bill of Materials) – The digital twin assembly across business partners.
+2. **SingleLevelSceneNode Structure** – The spatial geometry organization within a single Digital Twin.
+3. **Geometry File Internal Structure** – The native CAD assembly hierarchy inside the exchanged data files.
+
+Understanding the relationship and boundaries between these three structures is fundamental to correctly implementing geometry data exchange in Catena-X.
+
+### 1. BOM Structure: Digital Twin Assembly Across Participants
+
+The **BOM structure** (e.g., `SingleLevelBomAsBuilt`, `SingleLevelBomAsPlanned`) describes the **logical and semantic product structure** that spans multiple digital twins across organizational boundaries. This is fundamentally about **product composition**—how different products, parts, or materials are assembled to form a complete system.
+
+In Catena-X, the BOM represents the **inter-company assembly structure**. Each child item in a BOM points to the Catena-X ID of **another digital twin**, potentially owned and provided by a different participant (e.g., a supplier at Tier n+1). This enables the representation of complex, multi-tier product hierarchies where:
+
+- A vehicle (Tier n) is composed of major assemblies (doors, engine, transmission) provided by Tier n+1 suppliers.
+- Each major assembly is itself composed of sub-assemblies from Tier n+2 suppliers.
+- The BOM traverses these organizational boundaries, linking digital twins across the supply chain.
+
+**Key characteristics:**
+- **Scope:** Connects **multiple digital twins** across different business partners.
+- **Purpose:** Represents product assembly hierarchy and supply chain relationships.
+- **Linking Mechanism:** Via `childItems` referencing **external digital twins** (Catena-X IDs).
+- **Semantics:** Describes **what** products are composed of, rather than where they are positioned spatially.
+- **Independence:** The BOM is independent of geometry; a referenced twin may or may not contain geometric data.
+
+### 2. SingleLevelSceneNode Structure: Spatial Geometry Organization
+
+The **SingleLevelSceneNode structure** describes the **geometric and spatial organization** strictly within a single digital twin. It organizes geometry data by describing how individual objects or assemblies are positioned, transformed, and related to one another inside that specific twin.
+
+Each `SingleLevelSceneNode` represents a geometric object or anchor point. Through its child items, a scene node can reference other scene nodes, but **only those that belong to the same digital twin**. These hierarchical relationships are purely spatial—they define how geometry is composed and arranged (the "skeleton" of the model).
+
+**Key characteristics:**
+- **Scope:** Applies **only within one digital twin** (intra-company/intra-twin).
+- **Purpose:** Defines the spatial assembly, positioning, and relative transformations.
+- **Linking Mechanism:** Via `childItems` referencing **local** SceneNode IDs.
+- **Data Content:** Transformation matrices, bounding volumes, and metadata describing placement.
+- **Function:** It builds the internal spatial view of a twin, allowing for visualization and Digital Mock-Up (DMU) without strictly needing to parse the heavy geometry files immediately.
+
+### 3. Geometry File Internal Structure: The Native Data Payload
+
+The **Geometry File Internal Structure** refers to the hierarchy contained within the actual geometry data blob (the "Leaf Node" of the chain), such as a `.glb`, `.stp`, or `.jt` file.
+
+While the `SingleLevelSceneNode` handles the *positioning* of a file within the twin, the file itself often contains its own internal hierarchy. For example, a single GLB file representing an engine might internally contain hundreds of nodes representing screws, pistons, and casing, organized in a native node tree (e.g., glTF nodes) containing meshes, materials, and textures.
+
+**Key characteristics:**
+- **Scope:** Encapsulated **inside a specific file artifact** (Intra-file).
+- **Purpose:** Stores the actual mesh data (tessellation), surfaces, materials, and granular local assembly.
+- **Linking Mechanism:** Native file format referencing (e.g., glTF node hierarchy).
+- **Visibility:** To the Catena-X API, this is often a "black box" or a single resource. The internal structure is only accessible once the file is downloaded and parsed by a 3D viewer or CAD kernel.
+- **Granularity:** The complexity here depends on the authoring strategy. A file might contain a single part (Monolithic) or a complex sub-assembly (Nested).
+
+### Summary: Hierarchy Comparison
+
+The interaction between these layers allows for efficient data exchange: The **BOM** links the supply chain, the **SceneNodes** position the data within a specific twin, and the **Geometry File** delivers the actual visual/CAD payload.
+
+| Feature | **1. SingleLevelBOM** | **2. SingleLevelSceneNode** | **3. Geometry File Structure** |
+| :--- | :--- | :--- | :--- |
+| **Primary Function** | Logical/Functional Product Structure. | Spatial/Geometric Organization. | Mesh & Material Definition. |
+| **Scope** | **Inter-Twin**<br>(Across Business Partners). | **Intra-Twin**<br>(Within one Data Record). | **Intra-File**<br>(Inside the binary blob). |
+| **Relationship Type** | Semantic (Part A *is made of* Part B). | Spatial (Part A *is positioned relative to* Part B). | Native (Node *contains* Mesh primitives). |
+| **Linking Target** | **External** Catena-X IDs (Other Twins). | **Internal** SceneNode IDs or File References. | Internal Format Indices (e.g., glTF Node ID). |
+| **Typical Content** | Part Numbers, Quantities, Business Partner IDs. | Matrices, Bounding Boxes, Parent/Child IDs. | Triangles, Vertices, Textures, UVs. |
+| **Software Context** | PLM / ERP Systems. | DMU / 3D Layout Systems. | CAD Kernels / 3D Viewers. |
+
+
+## Modeling and Granularity Guidelines
+
+The key decision when structuring geometry data in Catena-X is the **level of granularity and control** required over the spatial hierarchy. This choice dictates whether the `SingleLevelSceneNode` layer is used extensively (SceneNode-Centric) or bypassed in favor of the native file's structure (File-Centric).
+
+The decision should be driven by the specific Catena-X use case, especially considering the need for **federation**, **lightweight data access**, and the **frequency of geometry updates**.
+
+### SceneNode-Centric Modeling (The Federation Layer)
+
+This approach utilizes the `SingleLevelSceneNode` structure to explicitly define the spatial relationships and transformations for sub-assemblies and parts *before* linking to the geometry files.
+
+#### Advantages (Pros) ✅
+* **Enables Federation:** Essential for allowing a consuming application (e.g., a viewer) to combine geometry from multiple Digital Twins (which are connected via the **BOM structure**) into one unified visual assembly. The SceneNodes provide the necessary **standardized root transformation** for each federated Twin's geometry.
+* **Lightweight Structural Queries:** Allows downstream applications to query the geometric bounding box, transformation matrix, and high-level assembly hierarchy (DMU) without downloading multi-gigabyte geometry files.
+* **Flexibility and Updateability:** Allows a part's geometry file to be replaced (e.g., swapping a high-res CAD model for a low-res visualization mesh) or its position/orientation to be updated simply by modifying the SceneNode metadata, without requiring re-export or re-upload of the large geometry file.
+* **Standardized Structure:** Provides a defined, API-accessible standard for the geometric skeleton, independent of the native file format (glTF, STEP, JT, etc.).
+
+#### Disadvantages (Cons) ❌
+* **Management Overhead:** Requires maintaining and managing an additional layer of Catena-X resources (`SingleLevelSceneNode` assets) alongside the BOM and the geometry file itself, increasing API calls and management complexity.
+* **Potential Redundancy:** If the internal file structure exactly duplicates the SceneNode structure, it introduces unnecessary complexity.
+
+### File-Centric Modeling (The Monolithic Approach)
+
+This approach minimizes the use of the `SingleLevelSceneNode` structure, relying instead on the internal hierarchy defined within the native geometry file (e.g., using glTF nodes or STEP sub-assemblies). The digital twin links directly from its root SceneNode to a single, large geometry file.
+
+#### Advantages (Pros) ✅
+* **Simplicity and Efficiency:** Significantly reduces the API overhead and the number of Catena-X resource definitions, resulting in a cleaner, more minimalist Digital Twin structure.
+* **Preservation of Native CAD Structure:** Best for use cases where the downstream system requires the original, native structure (e.g., capturing CAD constraints or non-visual metadata inherent to the native file format).
+* **Less Synchronization:** Only the large geometry file needs to be managed for structural changes.
+
+#### Disadvantages (Cons) ❌
+* **Black Box Nature:** Structural information is hidden inside the large file. Any application requiring structural insight (e.g., checking if a door is present, or getting the position of a tire) **must** download and parse the entire file. This is slow and bandwidth-intensive.
+* **No Direct Federation Capability:** While the **BOM** links the Twins, the monolithic approach provides no standardized root transformation metadata, forcing the consuming application to guess or apply generic transformations to the geometry.
+* **Rigidity:** Any required structural change (repositioning, swapping a sub-assembly) necessitates re-authoring and re-uploading the entire geometry file.
+
+
+### Guidelines: When to Use What
+
+This table provides a high-level guideline for choosing the appropriate modeling approach based on the primary use case requirements:
+
+| Scenario / Requirement | Recommended Approach | Justification |
+| :--- | :--- | :--- |
+| **Federated Assembly / Multi-Partner Visualisation** | **SceneNode-Centric** | **Required for providing the standardized spatial context** used by the BOM traversal for inter-twin visualization. |
+| **High Granularity / Frequent Updates** | **SceneNode-Centric** | Allows updates to position or geometry payload to be made by editing a small metadata node, avoiding large file re-upload/re-parsing. |
+| **Simple, Static Parts / Monolithic Components** | **File-Centric** | Minimal overhead. The geometry file is a single leaf component, reducing API complexity. |
+| **Structural Query Performance is Critical** | **SceneNode-Centric** | The structure is defined in metadata, enabling instant bounding box and transformation checks without heavy file download. |
+| **Downstream CAD System Expects Native Structure** | **File-Centric** | Preserves the native file's structure and metadata integrity for consumption by traditional CAD/PLM tools. |
+| **Assembly with Swappable Components** | **SceneNode-Centric** | SceneNodes act as placeholders. The geometry file link can be swapped easily to facilitate model configuration changes. |
 
 ## Example Files and Understanding
 
