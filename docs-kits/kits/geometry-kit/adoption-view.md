@@ -269,8 +269,8 @@ In short, SingleLevelSceneNode connects geometry within one digital twin, wherea
 
 The simplest example of geometry data being shared in the Catena-X ecosystem involves 2 participants. These participants are the *Tier n* and *Tier n+1*. The following example provides a guide for who owns which data and how these data are shared and used. The example consists of a bike, assembled from 2 components. A bike frame and a drive train. The geometry data for these components correspond to 2 STEP files, asm-frame.step and asm-drive.step, respectively. Both can be found in the basic-example directory of this KIT. Both can been seen rendered below.
 
-[![Bike Frame](./resources/basic-example/img/bike-frame.png)](./resources/basic-example/img/bike-frame.png)
-[![Bike Drive Train](./resources/basic-example/img/bike-drive-train.png)](./resources/basic-example/img/bike-drive-train.png)
+[![Bike Frame](./resources/basic-example-bike/img/bike-frame.png)](./resources/basic-example-bike/img/bike-frame.png)
+[![Bike Drive Train](./resources/basic-example-bike/img/bike-drive-train.png)](./resources/basic-example-bike/img/bike-drive-train.png)
 
 In this example, the *Tier n* owns the bike, builds the frame, and assembles the bike from components provided by various suppliers. Here, a single suppler is considered, *Tier n+1*, who provides the bike drive train. The diagram below depicts how the geometry data workflow between *Tier n* and *Tier n+1* could look, but it should be stressed again that this is only an example, and data sharing workflows will vary in design and complexity.
 
@@ -328,7 +328,7 @@ Here, the workflow starts on the left and progressed to the right as a function 
 
 7. **Final Approval in Aspect Model**: Once *Tier n* is satisfied, the Digital Twin for the combined geometry can be approved. This is the last step in this example.
 
-[![Bike frame and drive train combined](./resources/basic-example/img/bike-frame-and-drive-train.png)](./resources/basic-example/img/bike-frame-and-drive-train.png)
+[![Bike frame and drive train combined](./resources/basic-example-bike/img/bike-frame-and-drive-train.png)](./resources/basic-example-bike/img/bike-frame-and-drive-train.png)
 
 In theory, both the *Tier n* and *Tier n+1* can view each others geometry data throughout the entire workflow, following the 1 up 1 down principal, after the initial sharing of participant's Digital Twin.
 
@@ -336,8 +336,8 @@ In theory, both the *Tier n* and *Tier n+1* can view each others geometry data t
 
 |                           | **Tier n**                                                                        | **Tier n+1**                                                                      |
 |---------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| **STEP Files**            | [asm-frame.step](./resources/basic-example/STEP/asm-frame.step)                   | [asm-drive.step](./resources/basic-example/STEP/asm-drive.step)                   |
-| **Created JSON Payloads** | [slsn-frame-payload.json](./resources/basic-example/json/slsn-frame-payload.json) | [slsn-drive-payload.json](./resources/basic-example/json/slsn-drive-payload.json) |
+| **STEP Files**            | [asm-frame.step](./resources/basic-example-bike/step/asm-frame.step)                   | [asm-drive.step](./resources/basic-example-bike/step/asm-drive.step)                   |
+| **Created JSON Payloads** | [slsn-frame-payload.json](./resources/basic-example-bike/json/slsn-frame-payload.json) | [slsn-drive-payload.json](./resources/basic-example-bike/json/slsn-drive-payload.json) |
 
 The table above summarizes who owns which data throughout the progression of the workflow.
 
