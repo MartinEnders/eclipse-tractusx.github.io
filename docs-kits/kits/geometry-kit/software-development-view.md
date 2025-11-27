@@ -301,6 +301,55 @@ The following Catena-X components are required for geometry data exchange:
 - **[Submodel Service](https://github.com/eclipse-basyx/basyx-java-server-sdk)**: For SingleLevelSceneNode submodel handling
 - **Binary File Storage**: Secure storage solution for 3D geometry files with EDC integration
 
+---
+## Asset Administration Shell (AAS) Representation and Usage
+
+The **Asset Administration Shell (AAS)** and its Submodels provide the standardized wrapper for all data exposed in Catena-X. The `SingleLevelSceneNode` (SLSN) structure, being a complex, hierarchical aspect of the Digital Twin, is exposed via a dedicated **Submodel** designed for geometry.
+
+### The Access Chain
+
+The consumer follows a predictable chain of references to access the geometry data:
+
+1.  **Digital Twin Registry (DTR):** The consumer queries the DTR to find the AAS (Digital Twin) for a given Catena-X ID.
+2.  **AAS Shell:** The consumer retrieves the AAS structure, which contains a list of `Submodel` references.
+3.  **Submodel Reference:** The consumer identifies the reference corresponding to the **Geometry Aspect Model** (e.g., by checking the semantic ID, like the URN for `SingleLevelSceneNode`). This reference provides the endpoint URL to access the Submodel payload.
+4.  **Submodel Payload:** The consumer retrieves the actual Submodel payload (often JSON), which contains the complete list of all **SceneNodes** and their internal hierarchy for that specific Digital Twin.
+
+---
+
+### Finding the Root Scene Node(s)
+
+Since a single Digital Twin asset might contain multiple, independent geometric models (e.g., the primary part assembly and a smaller, separate fixture model), the AAS needs to clearly identify one or more root nodes.
+
+#### Mechanism for Identification
+
+In the AAS/Submodel structure, the root SceneNode(s) are identified by their position and definition:
+
+1.  **Submodel Element Collection:** The Submodel payload (the JSON body) will typically contain a single top-level **Submodel Element Collection** (or a similar construct like a list of Entities) that serves as the container for all geometric root elements.
+2.  **Root Definition:** A `SingleLevelSceneNode` is considered a **Root Node** within that Digital Twin's AAS structure if it is a direct child of the main geometric Submodel Collection and **does not reference any parent SceneNode** element in the Digital Twin's structure.
+3.  **Semantic ID (`idShort`):** For programmatic access, the root node(s) may be identified by a defined `idShort` within the Submodel (e.g., if a submodel only contains one root, its `idShort` might be specified as `"MainAssemblyRoot"`). A consumer application starts its traversal from any element identified as a root.
+
+*Note: In the simplest, File-Centric modeling scenario, the Submodel may contain only one root SceneNode, which immediately references the Geometry File resource.*
+
+---
+
+### Linking Sub-Scene Nodes and Traversal
+
+The hierarchy is strictly defined by the **intra-twin** linking mechanism within the Submodel itself.
+
+#### Mechanism for Hierarchy
+
+1.  **SceneNode as AAS Element:** Each `SingleLevelSceneNode` instance is represented as a complex **AAS Submodel Element** (e.g., an `Entity` or `SubmodelElementCollection`).
+2.  **Internal `childItems`:** The SceneNode element contains a **`childItems`** property. This property is defined as a list of **References** to other SceneNode Elements *within the same Submodel*.
+3.  **Traversal:** A consumer application performs traversal by:
+    * Starting at the identified **Root Scene Node(s)**.
+    * Reading the `childItems` list of the current node.
+    * For each entry in `childItems`, the application resolves the local **Reference** to find the next child SceneNode element within the Submodel payload.
+    * This process continues recursively until a node is reached that either contains a reference to the **Geometry File Internal Structure** (the data payload) or has an empty `childItems` list.
+
+This approach ensures that the entire spatial geometry organization of the Digital Twin can be retrieved and navigated using the standardized AAS REST API methods before a potentially large geometry file needs to be downloaded.
+
+
 ## Notice
 
 This work is licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
