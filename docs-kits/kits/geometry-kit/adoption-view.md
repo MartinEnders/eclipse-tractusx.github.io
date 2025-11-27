@@ -243,7 +243,6 @@ flowchart LR
 - The Digital Twin Registry enables discovery and linkage of geometry data across partners.
 - Data flows from Partner 1's app to their data source, is registered in the DTR, and exchanged via EDC to Partner 2, where it is consumed and reviewed in their own environment.
 
-## Geometry understanding
 
 ## Geometry Understanding
 
@@ -328,13 +327,13 @@ The decision should be driven by the specific Catena-X use case, especially cons
 
 This approach utilizes the `SingleLevelSceneNode` structure to explicitly define the spatial relationships and transformations for sub-assemblies and parts *before* linking to the geometry files.
 
-#### Advantages (Pros) ✅
+#### Advantages (Pros) 
 * **Enables Federation:** Essential for allowing a consuming application (e.g., a viewer) to combine geometry from multiple Digital Twins (which are connected via the **BOM structure**) into one unified visual assembly. The SceneNodes provide the necessary **standardized root transformation** for each federated Twin's geometry.
 * **Lightweight Structural Queries:** Allows downstream applications to query the geometric bounding box, transformation matrix, and high-level assembly hierarchy (DMU) without downloading multi-gigabyte geometry files.
 * **Flexibility and Updateability:** Allows a part's geometry file to be replaced (e.g., swapping a high-res CAD model for a low-res visualization mesh) or its position/orientation to be updated simply by modifying the SceneNode metadata, without requiring re-export or re-upload of the large geometry file.
 * **Standardized Structure:** Provides a defined, API-accessible standard for the geometric skeleton, independent of the native file format (glTF, STEP, JT, etc.).
 
-#### Disadvantages (Cons) ❌
+#### Disadvantages (Cons) 
 * **Management Overhead:** Requires maintaining and managing an additional layer of Catena-X resources (`SingleLevelSceneNode` assets) alongside the BOM and the geometry file itself, increasing API calls and management complexity.
 * **Potential Redundancy:** If the internal file structure exactly duplicates the SceneNode structure, it introduces unnecessary complexity.
 
@@ -342,12 +341,12 @@ This approach utilizes the `SingleLevelSceneNode` structure to explicitly define
 
 This approach minimizes the use of the `SingleLevelSceneNode` structure, relying instead on the internal hierarchy defined within the native geometry file (e.g., using glTF nodes or STEP sub-assemblies). The digital twin links directly from its root SceneNode to a single, large geometry file.
 
-#### Advantages (Pros) ✅
+#### Advantages (Pros) 
 * **Simplicity and Efficiency:** Significantly reduces the API overhead and the number of Catena-X resource definitions, resulting in a cleaner, more minimalist Digital Twin structure.
 * **Preservation of Native CAD Structure:** Best for use cases where the downstream system requires the original, native structure (e.g., capturing CAD constraints or non-visual metadata inherent to the native file format).
 * **Less Synchronization:** Only the large geometry file needs to be managed for structural changes.
 
-#### Disadvantages (Cons) ❌
+#### Disadvantages (Cons) 
 * **Black Box Nature:** Structural information is hidden inside the large file. Any application requiring structural insight (e.g., checking if a door is present, or getting the position of a tire) **must** download and parse the entire file. This is slow and bandwidth-intensive.
 * **No Direct Federation Capability:** While the **BOM** links the Twins, the monolithic approach provides no standardized root transformation metadata, forcing the consuming application to guess or apply generic transformations to the geometry.
 * **Rigidity:** Any required structural change (repositioning, swapping a sub-assembly) necessitates re-authoring and re-uploading the entire geometry file.
