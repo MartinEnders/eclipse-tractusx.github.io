@@ -267,7 +267,7 @@ The **BOM structure** (e.g., `SingleLevelBomAsBuilt`, `SingleLevelBomAsPlanned`)
 In Catena-X, the BOM represents the **inter-company assembly structure**. Each child item in a BOM points to the Catena-X ID of **another digital twin**, potentially owned and provided by a different participant (e.g., a supplier at Tier n+1). This enables the representation of complex, multi-tier product hierarchies where:
 
 - A vehicle (Tier n) is composed of major assemblies (doors, engine, transmission) provided by Tier n+1 suppliers.
-- Each major assembly is itself composed of sub-assemblies from Tier n+2 suppliers.
+- Each major assembly may itself be composed of sub-assemblies from Tier n+2 suppliers.
 - The BOM traverses these organizational boundaries, linking digital twins across the supply chain.
 
 **Key characteristics:**
