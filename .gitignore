@@ -25,6 +25,9 @@ yarn-error.log*
 # VS Code
 .vscode/
 
+# GitHub
+.github/
+
 # husky
 .husky/
 
