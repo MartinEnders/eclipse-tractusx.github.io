@@ -95,6 +95,7 @@ import BehaviorTwinKitLogo from "@site/static/img/kits/behavior-twin/behavior-tw
 import CircularityKitLogo from "@site/static/img/kits/circularity/circularity-kit-raw-logo.svg";
 import CustomsKitLogo from "@site/static/img/kits/customs/customs-kit-raw-logo.svg";
 import GeometryKitLogo from "@site/static/img/kits/geometry/geometry-kit-logo.svg";
+import SimulationKitLogo from "@site/static/img/kits/simulation/simulation-kit-raw-logo.svg";
 
 // Import Material-UI icons for industries
 import DirectionsCar from '@mui/icons-material/DirectionsCar';
@@ -875,6 +876,38 @@ export const kitsData = {
         created: '2025-11-28',
         lastUpdated: '2025-11-28',
         latestVersion: '1.0.0',
+        new: true
+      }
+    },
+    {
+      id: 'simulation',
+      name: 'SIMULATION KIT',
+      logo: SimulationKitLogo,
+      logoLicencse: {
+        type: 'CC-BY-4.0',
+        authors: '2026 Eclipse Tractus-X Contributors',
+        licenseUrl: 'https://github.com/eclipse-tractusx/eclipse-tractusx.github.io/blob/main/static/img/kits/simulation/simulation-kit-raw-logo.svg.license',
+        sourceUrl: 'https://github.com/eclipse-tractusx/eclipse-tractusx.github.io/blob/main/static/img/kits/simulation/simulation-kit-raw-logo.svg'
+      },
+      logoHeight: 100,
+      logoWidth: 100,
+      route: '/docs-kits/kits/simulation-kit/adoption-view',
+      colors: {
+        primary: '#4A90E2',
+        gradient: 'linear-gradient(135deg, #6BA8F5 0%, #4A90E2 100%)'
+      },
+      maturity: {
+        currentLevel: 'Sandbox',
+        graduationStatus: 'draft'
+      },
+      deprecated: false,
+      domain: 'Engineering',
+      industries: ['automotive'],
+      description: 'Enable collaborative simulation and model-based analysis across organizational boundaries for improved decision-making.',
+      metadata: {
+        created: '2026-02-04',
+        lastUpdated: '2026-02-04',
+        latestVersion: '.1.0',
         new: true
       }
     }

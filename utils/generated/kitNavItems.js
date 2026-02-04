@@ -20,7 +20,7 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
  * Generated from data/kitsData.js
- * Content hash: e63b19e2a3bd85db76dc1d4f2ccea92f4a66f7cb88b622a9b848e18b5958478f
+ * Content hash: 276a040ef561f94a32b1a38ed8182916affc2bf34ece8a00a22c4e3e67d48c08
  * 
  * To regenerate: npm run generate:nav-items
  * 
@@ -179,6 +179,12 @@ const kitsByCategory = {
       "id": "geometry",
       "name": "GEOMETRY KIT",
       "route": "/docs-kits/kits/geometry-kit/adoption-view",
+      "deprecated": false
+    },
+    {
+      "id": "simulation",
+      "name": "SIMULATION KIT",
+      "route": "/docs-kits/kits/simulation-kit/adoption-view",
       "deprecated": false
     }
   ],
