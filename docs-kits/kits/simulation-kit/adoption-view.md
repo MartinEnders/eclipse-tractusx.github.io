@@ -19,16 +19,23 @@ This documentation is an AI-generated example for demonstration purposes. The Si
 
 ### Vision
 
-Enable collaborative simulation and model-based analysis across organizational boundaries to improve decision-making, optimize processes, and accelerate innovation in the automotive value chain.
+The Simulation Kit envisions a future in which **model-based simulation becomes a seamlessly integrated, interoperable, and sovereign capability across the Catena‑X ecosystem**.  
+Instead of isolated simulation practices and tool-specific environments, model-based simulation is positioned as a **shared, trusted, and reusable asset** that strengthens engineering processes, system understanding, product quality, and collaborative decision‑making across organizations.
+
+In this envisioned state:
+- Model-based simulation artifacts—such as models, parameters, configurations, and results—can be **exchanged securely and consistently** across organizational boundaries, in line with Catena‑X principles for trustworthy and governed data collaboration.
+- Models become **modular, composable, and reusable** components that support system‑level understanding throughout product lifecycles.
+- Stakeholders across the value chain benefit from **greater transparency, improved predictability, reduced development cycles, and early insight into system behavior**, enabled through harmonized model-based simulation information.
+- The ecosystem uses an **open, standardized, and scalable approach** for integrating model-based simulation into digital workflows, reflecting the overarching goal of building secure and efficient data‑driven collaboration networks.
+
+Through this vision, model‑based simulation evolves from a local engineering activity into a **collaborative, interoperable cornerstone** of digital product and system development.
 
 ### Mission
 
-The Simulation KIT provides the standards, protocols, and reference implementations needed to:
+The mission of the Simulation Kit is to provide a **standardized, Catena‑X‑aligned foundation** for creating, managing, exchanging, and reusing model‑based simulation artifacts across organizations.  
+It delivers the definitions, architectural guidance, semantic structures, and exchange mechanisms needed to ensure **interoperability, data sovereignty, and consistent interpretation** of model‑based simulation content.
 
-- Share simulation models and results securely across company boundaries
-- Enable federated simulation workflows that respect data sovereignty
-- Standardize simulation data exchange formats and metadata
-- Support interoperability between different simulation tools and platforms
+To achieve this, the Kit establishes **shared semantics and data structures** for uniform understanding across tools and organizations, enables **sovereign, policy‑controlled exchange** of model‑based data in line with Catena‑X governance principles, supports **flexible integration** into diverse engineering environments, promotes **reusability and lifecycle‑oriented management** of model components, and strengthens **collaborative engineering** by enabling consistent model‑based insights across company boundaries.
 
 ## Business Value
 
