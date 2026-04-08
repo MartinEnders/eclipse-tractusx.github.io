@@ -27,6 +27,16 @@ which is available at
 https://creativecommons.org/licenses/by/4.0/legalcode.
 
 SPDX-License-Identifier: CC-BY-4.0
+
+OPEN TODOS FROM WG: 
+
+- Bosch Anmerkungen: 
+  - Siehe slides: 
+  - Bounding Boxes: It is unclear on how the bounding box gets placed in the geometry standard. Relative to CSYS or best fit to geometry
+  - 
+- Überlapp mit Masterdata prüfen 
+- Abhängigkeit zu Status Daten Model von Prostep Ivip
+
 -->
 
 ## Vision & Mission
