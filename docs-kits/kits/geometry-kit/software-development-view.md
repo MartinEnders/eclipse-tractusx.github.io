@@ -185,6 +185,15 @@ The following section gives an overview of the SingleLevelScenenNode aspect mode
 
 ### Example of a SingleLevelScenenNode Aspect Model
 
+This example shows a node ("Sheet_Tank") with one child node ("Lid_Full", which carries its own `localTransform`), one linked binary model item, and one bounding volume.
+
+`boundingVolumes` is a set, not a single object — a node MAY expose more than one representation of the same volume at once, e.g. a loose axis-aligned box alongside a tighter oriented one, each entry disambiguated by its own `boundingVolumeType`:
+
+- **AABB** (Axis-Aligned Bounding Box, as in this example): the box is axis-aligned to the node's own `localTransform`. `minPoint`/`maxPoint` and, if given, `length`/`width`/`height` are expressed directly in that frame.
+- **OBB** (Oriented Bounding Box): the box is oriented/fitted to the geometry instead. The same fields (`minPoint`/`maxPoint`, `length`/`width`/`height`) are still expressed in the box's own frame — they are never rotated or scaled by anything else — but that frame is now given explicitly by an additional `referenceCoordinateSystem` property (same matrix shape as `localTransform`). This means `length`/`width`/`height` can always be read directly, without accounting for rotation, regardless of whether the entry is an AABB or an OBB.
+
+The same structure is used in the frame and drive train payloads referenced in the [Adoption View](./adoption-view.md).
+
 ```json
 {
   "catenaXId": "urn:uuid:055c1128-0375-47c8-98de-7cf802c32411",
@@ -250,23 +259,24 @@ The following section gives an overview of the SingleLevelScenenNode aspect mode
       1
     ]
   },
-  "boundingVolume": {
-    "minPoint": [
-      0.4734369218349457,
-      -0.21899007260799408,
-      0.10562050342559814
-    ],
-    "maxPoint": [
-      1.3504363298416138,
-      0.21899007260799408,
-      0.6533777713775635
-    ]
-  }
+  "boundingVolumes": [
+    {
+      "boundingVolumeType": "AABB",
+      "minPoint": [
+        0.4734369218349457,
+        -0.21899007260799408,
+        0.10562050342559814
+      ],
+      "maxPoint": [
+        1.3504363298416138,
+        0.21899007260799408,
+        0.6533777713775635
+      ]
+    }
+  ]
 }
 
 ```
-
-Also have a look at the example in Adoption View.
 
 ## Data Retrieval Flow
 

@@ -31,16 +31,19 @@
             1
         ]
     },
-    "boundingVolume": {
-        "minPoint": [
-            -0.31,
-            -0.43,
-            -0.31
-        ],
-        "maxPoint": [
-            2.04,
-            0.43,
-            0.82
-        ]
-    }
+    "boundingVolumes": [
+        {
+            "boundingVolumeType": "AABB",
+            "minPoint": [
+                -0.31,
+                -0.43,
+                -0.31
+            ],
+            "maxPoint": [
+                2.04,
+                0.43,
+                0.82
+            ]
+        }
+    ]
 }
